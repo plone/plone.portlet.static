@@ -23,11 +23,6 @@ class IStaticPortlet(IPortletDataProvider):
                              description=_(u"Title of the rendered portlet"),
                              required=True)
 
-    header_url = schema.ASCIILine(title=_(u"Header URL"),
-                                  description=_(u"If specified, the portlet header "
-                                                 "will turn into a link."),
-                                  required=False)
-
     text = schema.Text(title=_(u"Text"),
                        description=_(u"The text to render"),
                        required=True)
@@ -36,9 +31,9 @@ class IStaticPortlet(IPortletDataProvider):
                              description=_(u"Text to be shown in the footer"),
                              required=False)
 
-    footer_url = schema.ASCIILine(title=_(u"Footer URL"),
-                                  description=_(u"If specified, the portlet footer "
-                                                 "will turn into a link."),
+    more_url = schema.ASCIILine(title=_(u"Details link"),
+                                  description=_(u"If given, the header and footer (if set)"
+                                                  "will turn links."),
                                   required=False)
 
 class Assignment(base.Assignment):
@@ -51,18 +46,15 @@ class Assignment(base.Assignment):
     implements(IStaticPortlet)
 
     header = u""
-    header_url = ''
     text = u""
     footer = u""
-    footer_url = ''
+    more_url = ''
 
-    def __init__(self, header=u"", header_url='', text=u"",
-                  footer=u"", footer_url=''):
+    def __init__(self, header=u"", text=u"", footer=u"", more_url=''):
         self.header = header
-        self.header_url = header_url
         self.text = text
         self.footer = footer
-        self.footer_url = footer_url
+        self.more_url = more_url
         
     @property
     def title(self):
@@ -81,14 +73,12 @@ class Renderer(base.Renderer):
 
     render = ViewPageTemplateFile('static.pt')
     
-    def header_is_link(self):
-        return bool(self.data.header_url)
+    def has_link(self):
+        return bool(self.data.more_url)
         
     def has_footer(self):
         return bool(self.data.footer)
         
-    def footer_is_link(self):
-        return bool(self.data.footer_url)
 
 class AddForm(base.AddForm):
     """Portlet add form.

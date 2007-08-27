@@ -4,8 +4,8 @@
     <dt class="portletHeader">
         <span class="portletTopLeft"></span>
         <span>
-           <a tal:omit-tag="not:view/header_is_link"
-              tal:attributes="href view/data/header_url"
+           <a tal:omit-tag="not:view/has_link"
+              tal:attributes="href view/data/more_url"
               tal:content="view/data/header"
               />
         </span>
@@ -17,8 +17,8 @@
     <dd class="portletFooter" tal:condition="view/has_footer">
         <span class="portletBotomLeft"></span>
         <span>
-           <a tal:omit-tag="not:view/footer_is_link"
-              tal:attributes="href view/data/footer_url"
+           <a tal:omit-tag="not:view/has_link"
+              tal:attributes="href view/data/more_url"
               tal:content="view/data/footer"
               />
         </span>
