@@ -1,7 +1,10 @@
 from zope.interface import implements
+from zope.component import getUtility
 
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.app.portlets.portlets import base
+
+from plone.i18n.normalizer.interfaces import IIDNormalizer
 
 from zope import schema
 from zope.formlib import form
@@ -27,6 +30,12 @@ class IStaticPortlet(IPortletDataProvider):
                        description=_(u"The text to render"),
                        required=True)
                        
+    omit_border = schema.Bool(title=_(u"Omit portlet border"),
+                              description=_(u"Tick this box if you want to render the text above without the "
+                                             "standard header, border or footer."),
+                              required=True,
+                              default=False)
+                       
     footer = schema.TextLine(title=_(u"Portlet footer"),
                              description=_(u"Text to be shown in the footer"),
                              required=False)
@@ -47,12 +56,14 @@ class Assignment(base.Assignment):
 
     header = u""
     text = u""
+    omit_border = False
     footer = u""
     more_url = ''
 
-    def __init__(self, header=u"", text=u"", footer=u"", more_url=''):
+    def __init__(self, header=u"", text=u"", omit_border=False, footer=u"", more_url=''):
         self.header = header
         self.text = text
+        self.omit_border = omit_border
         self.footer = footer
         self.more_url = more_url
         
@@ -72,6 +83,13 @@ class Renderer(base.Renderer):
     """
 
     render = ViewPageTemplateFile('static.pt')
+    
+    def css_class(self):
+        """Generate a CSS class from the portlet header
+        """
+        header = self.data.header
+        normalizer = getUtility(IIDNormalizer)
+        return "portlet-static-%s" % normalizer.normalize(header)
     
     def has_link(self):
         return bool(self.data.more_url)
