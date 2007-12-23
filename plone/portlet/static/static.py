@@ -11,6 +11,8 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from plone.portlet.static import StaticMessageFactory as _
 
+from plone.app.form.widgets.wysiwygwidget import WYSIWYGWidget
+
 class IStaticPortlet(IPortletDataProvider):
     """A portlet which renders predefined static HTML.
 
@@ -32,8 +34,8 @@ class IStaticPortlet(IPortletDataProvider):
                              required=False)
 
     more_url = schema.ASCIILine(title=_(u"Details link"),
-                                  description=_(u"If given, the header and footer (if set)"
-                                                  "will turn links."),
+                                  description=_(u"If given, the header and footer "
+                                                  "will link to this URL."),
                                   required=False)
 
 class Assignment(base.Assignment):
@@ -88,6 +90,7 @@ class AddForm(base.AddForm):
     constructs the assignment that is being added.
     """
     form_fields = form.Fields(IStaticPortlet)
+    form_fields['text'].custom_widget = WYSIWYGWidget
 
     def create(self, data):
         return Assignment(**data)
@@ -99,3 +102,4 @@ class EditForm(base.EditForm):
     zope.formlib which fields to display.
     """
     form_fields = form.Fields(IStaticPortlet)
+    form_fields['text'].custom_widget = WYSIWYGWidget
