@@ -27,7 +27,10 @@ setup(name='plone.portlet.static',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          # -*- Extra requirements: -*-
+          "plone.portlets",
+          "plone.app.portlets",
+          "plone.app.form",
+          "plone.i18n",
       ],
       entry_points="""
       # -*- Entry points: -*-
