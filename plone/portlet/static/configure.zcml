@@ -8,7 +8,7 @@
     <five:registerPackage package="." />
     
     <genericsetup:registerProfile
-       name="plone.portlet.static"
+       name="default"
        title="Static text portlet"
        directory="profiles/default"
        description="A simple portlet that displays static HTML"
