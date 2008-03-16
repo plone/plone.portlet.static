@@ -10,7 +10,7 @@ from zope import schema
 from zope.formlib import form
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-from plone.portlet.static import StaticMessageFactory as _
+from plone.portlet.static import PloneMessageFactory as _
 
 from plone.app.form.widgets.wysiwygwidget import WYSIWYGWidget
 

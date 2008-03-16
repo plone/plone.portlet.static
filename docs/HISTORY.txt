@@ -4,6 +4,9 @@ Changelog for plone.portlet.static
 
 plone.portlet.static - 1.0b1 Unreleased
 
+    - Changed the i18n domain to `plone`.
+      [hannosch]
+
     - Initial package structure.
       [zopeskel]
 
