@@ -1,7 +1,4 @@
-plone.portlet.static Package Readme
-=========================
+Introduction
+============
 
-Overview
---------
-
-A simple static HTML portlet for Plone 3
+A simple static HTML portlet for Plone 3.

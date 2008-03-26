@@ -1,18 +1,15 @@
 from setuptools import setup, find_packages
-import sys, os
+import os
 
 version = '1.1'
 
 setup(name='plone.portlet.static',
       version=version,
       description="A simple static HTML portlet for Plone 3",
-      long_description="""\
-""",
-      # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
+      long_description=open("README.txt").read() + "\n" +
+                       open(os.path.join("docs", "HISTORY.txt")).read()
       classifiers=[
         "Framework :: Plone",
-        "Framework :: Zope2",
-        "Framework :: Zope3",
         "Programming Language :: Python",
         "Topic :: Software Development :: Libraries :: Python Modules",
         ],
