@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.1.1 - unreleased
+------------------
+
+- Added option to (temporarily) hide the portlet without needing to
+  delete it.  [maurits]
+
+
 1.1.0 - April 20th 2008
 -----------------------
 

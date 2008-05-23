@@ -56,6 +56,13 @@ class TestPortlet(TestCase):
         renderer = getMultiAdapter((context, request, view, manager, assignment), IPortletRenderer)
         self.failUnless(isinstance(renderer, static.Renderer))
 
+        self.failUnless(renderer.available,
+                        "Renderer should be available by default.")
+        assignment = static.Assignment(header=u"title", text="text", hide=True)
+        renderer = getMultiAdapter((context, request, view, manager, assignment), IPortletRenderer)
+        self.failIf(renderer.available, "Renderer should not be available.")
+
+
 class TestRenderer(TestCase):
     
     def afterSetUp(self):
@@ -77,6 +84,15 @@ class TestRenderer(TestCase):
         output = r.render()
         self.failUnless('title' in output)
         self.failUnless('<b>text</b>' in output)
+
+    def test_available(self):
+        r = self.renderer(
+            context=self.portal,
+            assignment=static.Assignment(header=u"title", text="<b>text</b>",
+                                         hide=True))
+        r = r.__of__(self.folder)
+        r.update()
+        self.failIf(r.available, "Renderer should not be available.")
         
     def test_css_class(self):
         r = self.renderer(context=self.portal, 

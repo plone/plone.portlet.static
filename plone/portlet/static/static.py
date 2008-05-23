@@ -45,6 +45,14 @@ class IStaticPortlet(IPortletDataProvider):
                                                   "will link to this URL."),
                                   required=False)
 
+    hide = schema.Bool(
+        title=_(u"Hide portlet"),
+        description=_(u"Tick this box if you want to temporarily hide "
+                      "the portlet without losing your text."),
+        required=True,
+        default=False)
+
+
 class Assignment(base.Assignment):
     """Portlet assignment.
     
@@ -59,13 +67,16 @@ class Assignment(base.Assignment):
     omit_border = False
     footer = u""
     more_url = ''
+    hide = False
 
-    def __init__(self, header=u"", text=u"", omit_border=False, footer=u"", more_url=''):
+    def __init__(self, header=u"", text=u"", omit_border=False, footer=u"",
+                 more_url='', hide=False):
         self.header = header
         self.text = text
         self.omit_border = omit_border
         self.footer = footer
         self.more_url = more_url
+        self.hide = hide
         
     @property
     def title(self):
@@ -84,6 +95,10 @@ class Renderer(base.Renderer):
 
     render = ViewPageTemplateFile('static.pt')
     
+    @property
+    def available(self):
+        return not self.data.hide
+
     def css_class(self):
         """Generate a CSS class from the portlet header
         """
