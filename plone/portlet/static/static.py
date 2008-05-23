@@ -62,7 +62,7 @@ class Assignment(base.Assignment):
     
     implements(IStaticPortlet)
 
-    header = u""
+    header = _(u"title_static_portlet", default=u"Static text portlet")
     text = u""
     omit_border = False
     footer = u""
@@ -122,9 +122,14 @@ class AddForm(base.AddForm):
     """
     form_fields = form.Fields(IStaticPortlet)
     form_fields['text'].custom_widget = WYSIWYGWidget
+    label = _(u"title_add_static_portlet",
+              default=u"Add static text portlet")
+    description = _(u"description_static_portlet",
+                    default=u"A portlet which can display static HTML text.")
 
     def create(self, data):
         return Assignment(**data)
+
 
 class EditForm(base.EditForm):
     """Portlet edit form.
@@ -134,3 +139,7 @@ class EditForm(base.EditForm):
     """
     form_fields = form.Fields(IStaticPortlet)
     form_fields['text'].custom_widget = WYSIWYGWidget
+    label = _(u"title_edit_static_portlet",
+              default=u"Edit static text portlet")
+    description = _(u"description_static_portlet",
+                    default=u"A portlet which can display static HTML text.")

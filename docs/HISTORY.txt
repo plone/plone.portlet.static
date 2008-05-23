@@ -4,6 +4,9 @@ Changelog
 1.1.1 - unreleased
 ------------------
 
+- Added more i18n in the main python file as the i18n in portlets.xml
+  is not used.  [maurits]
+
 - Added option to (temporarily) hide the portlet without needing to
   delete it.  [maurits]
 
