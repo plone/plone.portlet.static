@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.1.1 - unreleased
-------------------
+1.1.2 - June 1st 2008
+---------------------
 
 - Added more i18n in the main python file as the i18n in portlets.xml
   is not used.  [maurits]
