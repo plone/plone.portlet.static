@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.1.3
+-----
+
+- Fixed a typo in CSS class name. This closes
+  http://dev.plone.org/plone/ticket/8119.
+  [hannosch]
+
 1.1.2 - June 1st 2008
 ---------------------
 

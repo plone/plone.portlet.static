@@ -29,7 +29,4 @@ setup(name='plone.portlet.static',
           "plone.app.form>=1.1dev",
           "plone.i18n",
       ],
-      entry_points="""
-      # -*- Entry points: -*-
-      """,
       )
