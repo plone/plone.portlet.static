@@ -4,8 +4,8 @@ Changelog
 1.1.6 Unreleased
 ----------------
 
-- Added class 'tile' to the link in dt.portletHeader for static 
-  portlet's template
+- Added 'tile' CSS class to the links within dt.portletHeader and 
+  dd.portletFooter for static portlet's template
   [spliter]
 
 1.1.5 - August 18th, 2008

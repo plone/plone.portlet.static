@@ -28,7 +28,8 @@
     <dd class="portletFooter" tal:condition="view/has_footer">
         <span class="portletBottomLeft"></span>
         <span>
-           <a tal:omit-tag="not:view/has_link"
+           <a class="tile"
+              tal:omit-tag="not:view/has_link"
               tal:attributes="href view/data/more_url"
               tal:content="view/data/footer"
               />
