@@ -4,6 +4,9 @@ Changelog
 1.1.6 Unreleased
 ----------------
 
+- Specify package dependencies.
+  [hannosch]
+
 - Added 'tile' CSS class to the links within dt.portletHeader and 
   dd.portletFooter for static portlet's template
   [spliter]
