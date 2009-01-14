@@ -21,6 +21,11 @@ setup(name='plone.portlet.static',
       namespace_packages=["plone", 'plone.portlet'],
       include_package_data=True,
       zip_safe=False,
+      extras_require=dict(
+        test=[
+            'Products.PloneTestCase',
+        ]
+      ),
       install_requires=[
           'setuptools',
           "plone.portlets",
@@ -32,7 +37,6 @@ setup(name='plone.portlet.static',
           'zope.i18nmessageid',
           'zope.interface',
           'zope.schema',
-          'Products.PloneTestCase',
           # 'Zope2',
       ],
       )
