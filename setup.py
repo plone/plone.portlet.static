@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.2'
+version = '2.0'
 
 setup(name='plone.portlet.static',
       version=version,
@@ -37,6 +37,6 @@ setup(name='plone.portlet.static',
           'zope.i18nmessageid',
           'zope.interface',
           'zope.schema',
-          # 'Zope2',
+          'Zope2',
       ],
       )
