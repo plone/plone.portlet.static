@@ -6,7 +6,7 @@ Changelog
 
 - The portlet was incorrectly using the 'Manage portlet' permission. It now
   uses a custom permission with the same default roles.
-  Fixes https://dev.plone.org/plone/ticket/8403.
+  Fixes http://dev.plone.org/plone/ticket/8403.
 
 - Declare test dependencies in an extra.
   [hannosch]
