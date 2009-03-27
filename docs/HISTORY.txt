@@ -1,12 +1,13 @@
 Changelog
 =========
 
-1.2 Unreleased
---------------
+1.2rc1 - March 27, 2009
+-----------------------
 
 - The portlet was incorrectly using the 'Manage portlet' permission. It now
   uses a custom permission with the same default roles.
   Fixes http://dev.plone.org/plone/ticket/8403.
+  [optilude]
 
 - Declare test dependencies in an extra.
   [hannosch]
