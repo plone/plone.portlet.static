@@ -4,6 +4,9 @@ Changelog
 2.0 Unreleased
 --------------
 
+- Adjusted test setup to Plone 5.
+  [hannosch]
+
 - Added the z3c.autoinclude entry point so this package is automatically loaded
   on Plone 3.3 and above.
   [hannosch]
