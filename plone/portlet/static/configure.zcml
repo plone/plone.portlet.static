@@ -14,6 +14,11 @@
        description="A simple portlet that displays static HTML"
        provides="Products.GenericSetup.interfaces.EXTENSION"
        />
+       
+     <permission
+       id="plone.portlet.static.AddStaticPortlet"
+       title="plone.portlet.static: Add static portlet"
+       />
  
      <!-- Register the portlet -->
      <plone:portlet
@@ -21,7 +26,7 @@
          interface=".static.IStaticPortlet"
          assignment=".static.Assignment"
          view_permission="zope2.View"
-         edit_permission="cmf.ManagePortal"
+         edit_permission="plone.portlet.static.AddStaticPortlet"
          renderer=".static.Renderer"
          addview=".static.AddForm"
          editview=".static.EditForm"
