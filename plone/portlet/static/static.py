@@ -2,6 +2,7 @@ from zope.interface import implements
 from zope.component import getUtility
 
 from plone.portlets.interfaces import IPortletDataProvider
+from plone.portlets.interfaces import IPortletAssignmentSettings
 from plone.app.portlets.portlets import base
 
 from plone.i18n.normalizer.interfaces import IIDNormalizer
@@ -14,6 +15,7 @@ from plone.portlet.static import PloneMessageFactory as _
 
 from plone.app.form.widgets.wysiwygwidget import WYSIWYGWidget
 
+import warnings
 
 class IStaticPortlet(IPortletDataProvider):
     """A portlet which renders predefined static HTML.
@@ -51,13 +53,6 @@ class IStaticPortlet(IPortletDataProvider):
                       "will link to this URL."),
         required=False)
 
-    hide = schema.Bool(
-        title=_(u"Hide portlet"),
-        description=_(u"Tick this box if you want to temporarily hide "
-                      "the portlet without losing your text."),
-        required=True,
-        default=False)
-
 
 class Assignment(base.Assignment):
     """Portlet assignment.
@@ -73,7 +68,6 @@ class Assignment(base.Assignment):
     omit_border = False
     footer = u""
     more_url = ''
-    hide = False
 
     def __init__(self, header=u"", text=u"", omit_border=False, footer=u"",
                  more_url='', hide=False):
@@ -82,7 +76,14 @@ class Assignment(base.Assignment):
         self.omit_border = omit_border
         self.footer = footer
         self.more_url = more_url
-        self.hide = hide
+        if hide:
+            deprecation_message = (
+                "The use of 'hide' has been deprecated and will be removed "
+                "in plone.portlet.static 2.0. "
+                "Instead, use the new generic built-in show/hide setting of plone.portlets.")
+            warnings.warn(deprecation_message, DeprecationWarning, 3)
+            settings = IPortletAssignmentSettings(self)
+            settings['visible'] = False
 
     @property
     def title(self):
@@ -101,10 +102,6 @@ class Renderer(base.Renderer):
     """
 
     render = ViewPageTemplateFile('static.pt')
-
-    @property
-    def available(self):
-        return not self.data.hide
 
     def css_class(self):
         """Generate a CSS class from the portlet header

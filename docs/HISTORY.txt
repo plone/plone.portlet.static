@@ -4,6 +4,9 @@ Changelog
 2.0 Unreleased
 --------------
 
+- Remove the "hide" option as this is now available to all portlets (PLIP 9286)
+  [igbun]
+
 - Adjusted test setup to Plone 5.
   [hannosch]
 

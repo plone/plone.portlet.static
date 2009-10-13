@@ -5,6 +5,7 @@ from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletAssignment
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.portlets.interfaces import IPortletRenderer
+from plone.portlets.interfaces import IPortletAssignmentSettings
 
 from plone.app.portlets.storage import PortletAssignmentMapping
 
@@ -58,9 +59,6 @@ class TestPortlet(TestCase):
 
         self.failUnless(renderer.available,
                         "Renderer should be available by default.")
-        assignment = static.Assignment(header=u"title", text="text", hide=True)
-        renderer = getMultiAdapter((context, request, view, manager, assignment), IPortletRenderer)
-        self.failIf(renderer.available, "Renderer should not be available.")
 
 
 class TestRenderer(TestCase):
@@ -85,14 +83,12 @@ class TestRenderer(TestCase):
         self.failUnless('title' in output)
         self.failUnless('<b>text</b>' in output)
 
-    def test_available(self):
-        r = self.renderer(
-            context=self.portal,
-            assignment=static.Assignment(header=u"title", text="<b>text</b>",
-                                         hide=True))
-        r = r.__of__(self.folder)
-        r.update()
-        self.failIf(r.available, "Renderer should not be available.")
+        
+    def test_hide(self):
+        assignment = static.Assignment(header=u"title", text="<b>text</b>", hide=True)
+        settings = IPortletAssignmentSettings(assignment)
+        self.failIf(settings.get('visible', True))
+
         
     def test_css_class(self):
         r = self.renderer(context=self.portal, 
