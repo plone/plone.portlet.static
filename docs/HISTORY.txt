@@ -1,6 +1,15 @@
 Changelog
 =========
 
+1.2rc2 - unreleased
+-------------------
+
+- Removed msgids in portlets.xml. There is no support for
+  msgids in the import of portlets.xml implementation.
+  This allows to extract translatable strings with i18ndude.
+  [vincentfretin]
+
+
 1.2rc1 - March 27, 2009
 -----------------------
 
