@@ -9,6 +9,7 @@ from plone.i18n.normalizer.interfaces import IIDNormalizer
 from zope import schema
 from zope.formlib import form
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.CMFCore.utils import getToolByName
 
 from plone.portlet.static import PloneMessageFactory as _
 
@@ -118,6 +119,17 @@ class Renderer(base.Renderer):
 
     def has_footer(self):
         return bool(self.data.footer)
+
+    def transformed(self, mt='text/x-html-captioned'):
+        """By default transform to resolve UID links
+        """
+        orig = self.data.text
+        if isinstance(orig, unicode):
+            orig = orig.encode('utf-8')
+        transformer = getToolByName(self, 'portal_transforms')
+        data = transformer.convertTo(mt, orig, object=self.data, context=self.context,
+                                     mimetype='text/html', encoding='utf-8')
+        return data.getData()
 
 
 class AddForm(base.AddForm):

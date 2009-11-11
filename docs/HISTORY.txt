@@ -9,6 +9,8 @@ Changelog
   This allows to extract translatable strings with i18ndude.
   [vincentfretin]
 
+- Added transform to resolve uids.
+  [lrowe]
 
 1.2rc1 - March 27, 2009
 -----------------------

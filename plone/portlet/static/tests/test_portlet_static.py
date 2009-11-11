@@ -1,4 +1,5 @@
 from zope.component import getUtility, getMultiAdapter
+from Products.kupu.plone.util import install_transform
 
 from plone.portlets.interfaces import IPortletType
 from plone.portlets.interfaces import IPortletManager
@@ -16,6 +17,8 @@ class TestPortlet(TestCase):
 
     def afterSetUp(self):
         self.setRoles(('Manager',))
+        # Install kupu transforms
+        install_transform(self.portal)
 
     def testPortletTypeRegistered(self):
         portlet = getUtility(IPortletType, name='plone.portlet.static.Static')
@@ -67,6 +70,8 @@ class TestRenderer(TestCase):
     
     def afterSetUp(self):
         self.setRoles(('Manager',))
+        # Install kupu transforms
+        install_transform(self.portal)
 
     def renderer(self, context=None, request=None, view=None, manager=None, assignment=None):
         context = context or self.folder
