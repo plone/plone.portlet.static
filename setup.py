@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.2rc2'
+version = '1.1.centrepoint'
 
 setup(name='plone.portlet.static',
       version=version,
@@ -32,12 +32,6 @@ setup(name='plone.portlet.static',
           "plone.app.portlets",
           "plone.app.form>=1.1",
           "plone.i18n",
-          'zope.component',
-          'zope.formlib',
-          'zope.i18nmessageid',
-          'zope.interface',
-          'zope.schema',
-          'Products.kupu',
           # 'Zope2',
       ],
       )
