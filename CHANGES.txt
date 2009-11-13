@@ -1,8 +1,8 @@
 Changelog
 =========
 
-2.0 Unreleased
---------------
+2.0a1 - 2009-11-13
+------------------
 
 - Remove the "hide" option as this is now available to all portlets (PLIP 9286)
   [igbun]
@@ -24,7 +24,6 @@ Changelog
   dd.portletFooter for static portlet's template
   [spliter]
 
-
 1.2rc2 - unreleased
 -------------------
 
@@ -32,7 +31,6 @@ Changelog
   msgids in the import of portlets.xml implementation.
   This allows to extract translatable strings with i18ndude.
   [vincentfretin]
-
 
 1.2rc1 - March 27, 2009
 -----------------------
@@ -58,7 +56,6 @@ Changelog
 - Added option to (temporarily) hide the portlet without needing to
   delete it.  [maurits]
 
-
 1.1.0 - April 20th 2008
 -----------------------
 
@@ -83,7 +80,6 @@ Changelog
 - Add a version restriction on the plone.app.form dependency.
   [optilude]
 
-
 1.1.0a1 - March 9, 2008
 -----------------------
 
@@ -96,20 +92,17 @@ Changelog
 - Add an 'omit border' option
   [optilude]
 
-
 1.0b3 - August 27, 2007
 -----------------------
 
 - Correct portlet styling to Plone standards
   [optilude]
 
-
 1.0b2 - August 26, 2007
 -----------------------
 
 - Make haeder and footer configurable
   [optilude]
-
 
 1.0b1 - August 26, 2007
 -----------------------

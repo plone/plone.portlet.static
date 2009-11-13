@@ -1,18 +1,17 @@
 from setuptools import setup, find_packages
-import os
 
-version = '2.0'
+version = '2.0a1'
 
 setup(name='plone.portlet.static',
       version=version,
-      description="A simple static HTML portlet for Plone 3",
+      description="A simple static HTML portlet for Plone.",
       long_description=open("README.txt").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
+                       open("CHANGES.txt").read(),
       classifiers=[
         "Framework :: Plone",
         "Programming Language :: Python",
         ],
-      keywords='plone 3 portlet',
+      keywords='plone portlet',
       author='Martin Aspeli',
       author_email='optilude@gmx.net',
       url='http://plone.org',
