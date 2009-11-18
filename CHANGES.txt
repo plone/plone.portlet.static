@@ -1,9 +1,11 @@
 Changelog
 =========
 
-2.0b1 - Unreleased
+2.0a2 - 2009-11-18
 ------------------
 
+- Removed reference to non-existent profile in plone.app.portlets.
+  [hannosch]
 
 2.0a1 - 2009-11-13
 ------------------

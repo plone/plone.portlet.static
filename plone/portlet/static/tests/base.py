@@ -14,7 +14,6 @@ def setup_package():
 
 setup_package()
 ptc.setupPloneSite(extension_profiles=(
-    'plone.app.portlets:default',
     'plone.portlet.static:default',
 ))
 
