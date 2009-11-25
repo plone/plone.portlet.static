@@ -4,6 +4,9 @@ Changelog
 2.0b1 - Unreleased
 ------------------
 
+- Removed Kupu as a testing dependency. In Plone 4 the tests work with the
+  default TinyMCE transforms.
+  [hannosch]
 
 2.0a2 - 2009-11-18
 ------------------

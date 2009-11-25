@@ -23,7 +23,6 @@ setup(name='plone.portlet.static',
       extras_require=dict(
         test=[
             'Products.PloneTestCase',
-            'Products.kupu',
         ]
       ),
       install_requires=[
