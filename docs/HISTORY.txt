@@ -4,6 +4,11 @@ Changelog
 1.2rc2 - unreleased
 -------------------
 
+- Ensure that text output is passed through the safe-html transform to protect
+  against malicious text. This also ensures the resolve uid behavior works when
+  only TinyMCE and not Kupu is installed.
+  [hannosch]
+
 - Removed msgids in portlets.xml. There is no support for
   msgids in the import of portlets.xml implementation.
   This allows to extract translatable strings with i18ndude.

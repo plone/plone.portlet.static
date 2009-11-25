@@ -1,19 +1,21 @@
-from zope.interface import implements
-from zope.component import getUtility
-
-from plone.portlets.interfaces import IPortletDataProvider
-from plone.app.portlets.portlets import base
+import logging
 
 from plone.i18n.normalizer.interfaces import IIDNormalizer
-
+from plone.portlets.interfaces import IPortletDataProvider
+from plone.app.form.widgets.wysiwygwidget import WYSIWYGWidget
+from plone.app.portlets.portlets import base
 from zope import schema
+from zope.interface import implements
+from zope.component import getUtility
 from zope.formlib import form
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+
+from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from plone.portlet.static import PloneMessageFactory as _
 
-from plone.app.form.widgets.wysiwygwidget import WYSIWYGWidget
+logger = logging.getLogger('plone.portlet.static')
 
 
 class IStaticPortlet(IPortletDataProvider):
@@ -120,16 +122,31 @@ class Renderer(base.Renderer):
     def has_footer(self):
         return bool(self.data.footer)
 
-    def transformed(self, mt='text/x-html-captioned'):
-        """By default transform to resolve UID links
+    def transformed(self, mt='text/x-html-safe'):
+        """Use the safe_html transform to protect text output. This also
+        ensures that resolve UID links are transformed into real links.
         """
         orig = self.data.text
-        if isinstance(orig, unicode):
-            orig = orig.encode('utf-8')
-        transformer = getToolByName(self, 'portal_transforms')
-        data = transformer.convertTo(mt, orig, object=self.data, context=self.context,
-                                     mimetype='text/html', encoding='utf-8')
-        return data.getData()
+        context = aq_inner(self.context)
+        if not isinstance(orig, unicode):
+            # Apply a potentially lossy transformation, and hope we stored
+            # utf-8 text. There were bugs in earlier versions of this portlet
+            # which stored text directly as sent by the browser, which could
+            # be any encoding in the world.
+            orig = unicode(orig, 'utf-8', ignore)
+            logger.warn("Static portlet at %s has stored non-unicode text. "
+                        "Assuming utf-8 encoding." % context.absolute_url())
+
+        # Portal transforms needs encoded strings
+        orig = orig.encode('utf-8')
+
+        transformer = getToolByName(context, 'portal_transforms')
+        data = transformer.convertTo(mt, orig, object=self.data,
+                                     context=context, mimetype='text/html')
+        result = data.getData()
+        if result:
+            return unicode(result, 'utf-8')
+        return None
 
 
 class AddForm(base.AddForm):
