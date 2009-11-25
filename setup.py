@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.2rc2'
+version = '1.2'
 
 setup(name='plone.portlet.static',
       version=version,
@@ -12,7 +12,7 @@ setup(name='plone.portlet.static',
         "Framework :: Plone",
         "Programming Language :: Python",
         ],
-      keywords='plone 3 portlet',
+      keywords='plone portlet',
       author='Martin Aspeli',
       author_email='optilude@gmx.net',
       url='http://plone.org',

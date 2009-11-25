@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.2rc2 - unreleased
--------------------
+1.2 - 2009-11-25
+----------------
 
 - Ensure that text output is passed through the safe-html transform to protect
   against malicious text. This also ensures the resolve uid behavior works when
