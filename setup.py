@@ -36,6 +36,7 @@ setup(name='plone.portlet.static',
           'zope.i18nmessageid',
           'zope.interface',
           'zope.schema',
+          'Products.kupu',
           'Zope2',
       ],
       entry_points="""

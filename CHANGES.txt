@@ -34,13 +34,25 @@ Changelog
   dd.portletFooter for static portlet's template
   [spliter]
 
-1.2rc2 - unreleased
--------------------
+1.2.1 - Unreleased
+------------------
+
+
+1.2 - 2009-11-25
+----------------
+
+- Ensure that text output is passed through the safe-html transform to protect
+  against malicious text. This also ensures the resolve uid behavior works when
+  only TinyMCE and not Kupu is installed.
+  [hannosch]
 
 - Removed msgids in portlets.xml. There is no support for
   msgids in the import of portlets.xml implementation.
   This allows to extract translatable strings with i18ndude.
   [vincentfretin]
+
+- Added transform to resolve uids.
+  [lrowe]
 
 1.2rc1 - March 27, 2009
 -----------------------
