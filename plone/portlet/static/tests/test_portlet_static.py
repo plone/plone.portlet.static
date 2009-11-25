@@ -88,18 +88,16 @@ class TestRenderer(TestCase):
         self.failUnless('title' in output)
         self.failUnless('<b>text</b>' in output)
 
-        
     def test_hide(self):
         assignment = static.Assignment(header=u"title", text="<b>text</b>", hide=True)
         settings = IPortletAssignmentSettings(assignment)
         self.failIf(settings.get('visible', True))
 
-        
     def test_css_class(self):
         r = self.renderer(context=self.portal, 
                           assignment=static.Assignment(header=u"Welcome text", text="<b>text</b>"))
         self.assertEquals('portlet-static-welcome-text', r.css_class())
-        
+
 def test_suite():
     from unittest import TestSuite, makeSuite
     suite = TestSuite()

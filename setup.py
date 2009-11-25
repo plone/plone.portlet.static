@@ -13,7 +13,7 @@ setup(name='plone.portlet.static',
         ],
       keywords='plone portlet',
       author='Martin Aspeli',
-      author_email='optilude@gmx.net',
+      author_email='plone-developers@lists.sourceforge.net',
       url='http://plone.org',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
@@ -23,6 +23,7 @@ setup(name='plone.portlet.static',
       extras_require=dict(
         test=[
             'Products.PloneTestCase',
+            'Products.kupu',
         ]
       ),
       install_requires=[
@@ -36,7 +37,6 @@ setup(name='plone.portlet.static',
           'zope.i18nmessageid',
           'zope.interface',
           'zope.schema',
-          'Products.kupu',
           'Zope2',
       ],
       entry_points="""
