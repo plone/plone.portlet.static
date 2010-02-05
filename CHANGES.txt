@@ -4,6 +4,10 @@ Changelog
 2.0b2 - Unreleased
 ------------------
 
+- Removed the transformation cache from the portlet renderer. Portal transforms
+  doesn't actually work with the assignment class as a cache context.
+  This closes http://dev.plone.org/plone/ticket/10167.
+  [hannosch]
 
 2.0b1 - 2009-12-02
 ------------------

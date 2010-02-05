@@ -138,7 +138,7 @@ class Renderer(base.Renderer):
         orig = orig.encode('utf-8')
 
         transformer = getToolByName(context, 'portal_transforms')
-        data = transformer.convertTo(mt, orig, object=self.data,
+        data = transformer.convertTo(mt, orig,
                                      context=context, mimetype='text/html')
         result = data.getData()
         if result:
