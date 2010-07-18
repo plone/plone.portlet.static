@@ -2,7 +2,6 @@ import logging
 
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.portlets.interfaces import IPortletDataProvider
-from plone.portlets.interfaces import IPortletAssignmentSettings
 from plone.app.form.widgets.wysiwygwidget import WYSIWYGWidget
 from plone.app.portlets.portlets import base
 from zope import schema
@@ -18,7 +17,6 @@ from plone.portlet.static import PloneMessageFactory as _
 
 logger = logging.getLogger('plone.portlet.static')
 
-import warnings
 
 class IStaticPortlet(IPortletDataProvider):
     """A portlet which renders predefined static HTML.
@@ -73,20 +71,12 @@ class Assignment(base.Assignment):
     more_url = ''
 
     def __init__(self, header=u"", text=u"", omit_border=False, footer=u"",
-                 more_url='', hide=False):
+                 more_url=''):
         self.header = header
         self.text = text
         self.omit_border = omit_border
         self.footer = footer
         self.more_url = more_url
-        if hide:
-            deprecation_message = (
-                "The use of 'hide' has been deprecated and will be removed "
-                "in plone.portlet.static 2.0. "
-                "Instead, use the new generic built-in show/hide setting of plone.portlets.")
-            warnings.warn(deprecation_message, DeprecationWarning, 3)
-            settings = IPortletAssignmentSettings(self)
-            settings['visible'] = False
 
     @property
     def title(self):

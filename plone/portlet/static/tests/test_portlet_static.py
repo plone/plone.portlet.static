@@ -1,17 +1,14 @@
-from zope.component import getUtility, getMultiAdapter
-
 from plone.portlets.interfaces import IPortletType
 from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletAssignment
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.portlets.interfaces import IPortletRenderer
-from plone.portlets.interfaces import IPortletAssignmentSettings
-
 from plone.app.portlets.storage import PortletAssignmentMapping
+from zope.component import getUtility, getMultiAdapter
 
 from plone.portlet.static import static
-
 from plone.portlet.static.tests.base import TestCase
+
 
 class TestPortlet(TestCase):
 
@@ -62,7 +59,7 @@ class TestPortlet(TestCase):
 
 
 class TestRenderer(TestCase):
-    
+
     def afterSetUp(self):
         self.setRoles(('Manager',))
 
@@ -84,14 +81,13 @@ class TestRenderer(TestCase):
         self.failUnless('<b>text</b>' in output)
 
     def test_hide(self):
-        assignment = static.Assignment(header=u"title", text="<b>text</b>", hide=True)
-        settings = IPortletAssignmentSettings(assignment)
-        self.failIf(settings.get('visible', True))
+        self.assertRaises(TypeError, static.Assignment, hide=True)
 
     def test_css_class(self):
-        r = self.renderer(context=self.portal, 
+        r = self.renderer(context=self.portal,
                           assignment=static.Assignment(header=u"Welcome text", text="<b>text</b>"))
         self.assertEquals('portlet-static-welcome-text', r.css_class())
+
 
 def test_suite():
     from unittest import TestSuite, makeSuite
