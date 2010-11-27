@@ -4,6 +4,10 @@ Changelog
 2.0.1 - unreleased
 ------------------
 
+- Add Site Administrator to the default roles for the
+  "plone.portlet.static: Add static portlet" permission, for forward
+  compatibility with Plone 4.1.
+  [davisagli]
 
 2.0 - 2010-07-18
 ----------------
