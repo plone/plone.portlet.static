@@ -4,6 +4,7 @@ from Products.Five import fiveconfigure
 from Products.PloneTestCase import PloneTestCase as ptc
 from Products.PloneTestCase.layer import onsetup
 
+
 @onsetup
 def setup_package():
     fiveconfigure.debug_mode = True
@@ -17,10 +18,12 @@ ptc.setupPloneSite(extension_profiles=(
     'plone.portlet.static:default',
 ))
 
+
 class TestCase(ptc.PloneTestCase):
     """Base class used for test cases
     """
-        
+
+
 class FunctionalTestCase(ptc.FunctionalTestCase):
     """Test case class used for functional (doc-)tests
     """

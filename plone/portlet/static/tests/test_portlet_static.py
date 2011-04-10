@@ -13,7 +13,7 @@ from plone.portlet.static.tests.base import TestCase
 class TestPortlet(TestCase):
 
     def afterSetUp(self):
-        self.setRoles(('Manager',))
+        self.setRoles(('Manager', ))
 
     def testPortletTypeRegistered(self):
         portlet = getUtility(IPortletType, name='plone.portlet.static.Static')
@@ -61,7 +61,7 @@ class TestPortlet(TestCase):
 class TestRenderer(TestCase):
 
     def afterSetUp(self):
-        self.setRoles(('Manager',))
+        self.setRoles(('Manager', ))
 
     def renderer(self, context=None, request=None, view=None, manager=None, assignment=None):
         context = context or self.folder

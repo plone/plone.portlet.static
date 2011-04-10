@@ -39,7 +39,7 @@ class IStaticPortlet(IPortletDataProvider):
     omit_border = schema.Bool(
         title=_(u"Omit portlet border"),
         description=_(u"Tick this box if you want to render the text above "
-                      "without the standard header, border or footer."),
+            "without the standard header, border or footer."),
         required=True,
         default=False)
 
@@ -51,7 +51,7 @@ class IStaticPortlet(IPortletDataProvider):
     more_url = schema.ASCIILine(
         title=_(u"Details link"),
         description=_(u"If given, the header and footer "
-                      "will link to this URL."),
+            "will link to this URL."),
         required=False)
 
 
@@ -122,7 +122,7 @@ class Renderer(base.Renderer):
             # be any encoding in the world.
             orig = unicode(orig, 'utf-8', 'ignore')
             logger.warn("Static portlet at %s has stored non-unicode text. "
-                        "Assuming utf-8 encoding." % context.absolute_url())
+                "Assuming utf-8 encoding." % context.absolute_url())
 
         # Portal transforms needs encoded strings
         orig = orig.encode('utf-8')
@@ -145,10 +145,9 @@ class AddForm(base.AddForm):
     """
     form_fields = form.Fields(IStaticPortlet)
     form_fields['text'].custom_widget = WYSIWYGWidget
-    label = _(u"title_add_static_portlet",
-              default=u"Add static text portlet")
+    label = _(u"title_add_static_portlet", default=u"Add static text portlet")
     description = _(u"description_static_portlet",
-                    default=u"A portlet which can display static HTML text.")
+        default=u"A portlet which can display static HTML text.")
 
     def create(self, data):
         return Assignment(**data)
@@ -162,7 +161,6 @@ class EditForm(base.EditForm):
     """
     form_fields = form.Fields(IStaticPortlet)
     form_fields['text'].custom_widget = WYSIWYGWidget
-    label = _(u"title_edit_static_portlet",
-              default=u"Edit static text portlet")
+    label = _(u"title_edit_static_portlet", default=u"Edit static text portlet")
     description = _(u"description_static_portlet",
-                    default=u"A portlet which can display static HTML text.")
+        default=u"A portlet which can display static HTML text.")
