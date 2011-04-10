@@ -8,6 +8,9 @@ Changelog
 - Add MANIFEST.in.
   [WouterVH]
 
+- Add metadata.xml to profile.
+  [WouterVH]
+
 
 2.0.1 - 2011-01-03
 ------------------
