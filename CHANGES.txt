@@ -1,6 +1,14 @@
 Changelog
 =========
 
+
+2.0.2 - Unreleased
+------------------
+
+- Add MANIFEST.in.
+  [WouterVH]
+
+
 2.0.1 - 2011-01-03
 ------------------
 
@@ -8,6 +16,7 @@ Changelog
   "plone.portlet.static: Add static portlet" permission, for forward
   compatibility with Plone 4.1.
   [davisagli]
+
 
 2.0 - 2010-07-18
 ----------------
@@ -18,6 +27,7 @@ Changelog
 - Update license to GPL version 2 only.
   [hannosch]
 
+
 2.0b2 - 2010-02-17
 ------------------
 
@@ -26,6 +36,7 @@ Changelog
   This closes http://dev.plone.org/plone/ticket/10167.
   [hannosch]
 
+
 2.0b1 - 2009-12-02
 ------------------
 
@@ -33,11 +44,13 @@ Changelog
   default TinyMCE transforms.
   [hannosch]
 
+
 2.0a2 - 2009-11-18
 ------------------
 
 - Removed reference to non-existent profile in plone.app.portlets.
   [hannosch]
+
 
 2.0a1 - 2009-11-13
 ------------------
@@ -62,11 +75,13 @@ Changelog
   dd.portletFooter for static portlet's template
   [spliter]
 
+
 1.2.1 - 2009-11-25
 ------------------
 
 - Fixed a syntax error introduced in the last change.
   [hannosch]
+
 
 1.2 - 2009-11-25
 ----------------
@@ -84,23 +99,26 @@ Changelog
 - Added transform to resolve uids.
   [lrowe]
 
-1.2rc1 - March 27, 2009
------------------------
+
+1.2rc1 - 2009-03-27
+-------------------
 
 - The portlet was incorrectly using the 'Manage portlet' permission. It now
   uses a custom permission with the same default roles.
   Fixes http://dev.plone.org/plone/ticket/8403.
   [optilude]
 
-1.1.5 - August 18th, 2008
--------------------------
+
+1.1.5 - 2008-08-18
+------------------
 
 - Fixed a typo in CSS class name. This closes
   http://dev.plone.org/plone/ticket/8119.
   [hannosch]
 
-1.1.2 - June 1st 2008
----------------------
+
+1.1.2 -  2008-06-01
+-------------------
 
 - Added more i18n in the main python file as the i18n in portlets.xml
   is not used.  [maurits]
@@ -108,13 +126,15 @@ Changelog
 - Added option to (temporarily) hide the portlet without needing to
   delete it.  [maurits]
 
-1.1.0 - April 20th 2008
------------------------
+
+1.1.0 - 2008-04-20
+------------------
 
 - Unchanged from 1.1rc2
 
-1.1rc2 - March 26, 2008
------------------------
+
+1.1rc2 - 2008-03-26
+-------------------
 
 - Use README.txt and HISTORY.txt as the package's long description and
   add missing history entries for all releases.
@@ -123,8 +143,9 @@ Changelog
 - Fix the version restriction on the plone.app.form dependency.
   [wichert]
 
-1.1rc1 - March 25, 2008
------------------------
+
+1.1rc1 - 2008-03-25
+-------------------
 
 - Add missing i18n support.
   [hannosch]
@@ -132,8 +153,9 @@ Changelog
 - Add a version restriction on the plone.app.form dependency.
   [optilude]
 
-1.1.0a1 - March 9, 2008
------------------------
+
+1.1.0a1 - 2008-03-09
+--------------------
 
 - Packaging cleanups
   [wichert]
@@ -144,20 +166,23 @@ Changelog
 - Add an 'omit border' option
   [optilude]
 
-1.0b3 - August 27, 2007
------------------------
+
+1.0b3 - 2007-08-27
+-------------------
 
 - Correct portlet styling to Plone standards
   [optilude]
 
-1.0b2 - August 26, 2007
------------------------
 
-- Make haeder and footer configurable
+1.0b2 - 2007-08-26
+------------------
+
+- Make header and footer configurable
   [optilude]
 
-1.0b1 - August 26, 2007
------------------------
+
+1.0b1 - 2007-08-26
+------------------
 
 - Added missing i18n markup to portlets.xml.
   [hannosch]
@@ -167,4 +192,3 @@ Changelog
 
 - Initial release
   [optilude]
-

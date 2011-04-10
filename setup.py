@@ -1,12 +1,26 @@
+import os
 from setuptools import setup, find_packages
 
-version = '2.0.1'
+
+def read(*rnames):
+    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
+
+version = '2.0.2dev'
+
+long_description = (
+    read('README.txt')
+    + '\n' +
+#    read('plone', 'portlet', 'static', 'README.txt')
+#    + '\n' +
+    read('CHANGES.txt')
+    + '\n'
+    )
+
 
 setup(name='plone.portlet.static',
       version=version,
       description="A simple static HTML portlet for Plone.",
-      long_description=open("README.txt").read() + "\n" +
-                       open("CHANGES.txt").read(),
+      long_description=long_description,
       classifiers=[
           "Environment :: Web Environment",
           "Framework :: Plone",
