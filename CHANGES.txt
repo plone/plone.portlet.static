@@ -11,6 +11,9 @@ Changelog
 - Add metadata.xml to profile.
   [WouterVH]
 
+- Implemented support for assigning portlet styles.
+  [dokai]
+
 
 2.0.1 - 2011-01-03
 ------------------
@@ -74,7 +77,7 @@ Changelog
 - Specify package dependencies.
   [hannosch]
 
-- Added 'tile' CSS class to the links within dt.portletHeader and 
+- Added 'tile' CSS class to the links within dt.portletHeader and
   dd.portletFooter for static portlet's template
   [spliter]
 

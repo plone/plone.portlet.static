@@ -54,6 +54,8 @@ class IStaticPortlet(IPortletDataProvider):
             "will link to this URL."),
         required=False)
 
+    portlet_style = base.PortletStyleField
+
 
 class Assignment(base.Assignment):
     """Portlet assignment.
@@ -71,12 +73,13 @@ class Assignment(base.Assignment):
     more_url = ''
 
     def __init__(self, header=u"", text=u"", omit_border=False, footer=u"",
-                 more_url=''):
+                 more_url='', portlet_style=''):
         self.header = header
         self.text = text
         self.omit_border = omit_border
         self.footer = footer
         self.more_url = more_url
+        self.portlet_style = portlet_style
 
     @property
     def title(self):
@@ -101,7 +104,10 @@ class Renderer(base.Renderer):
         """
         header = self.data.header
         normalizer = getUtility(IIDNormalizer)
-        return "portlet-static-%s" % normalizer.normalize(header)
+        css = ["portlet-static-%s" % normalizer.normalize(header)]
+        if self.data.portlet_style.strip():
+            css.append(self.data.portlet_style.strip())
+        return " ".join(css)
 
     def has_link(self):
         return bool(self.data.more_url)

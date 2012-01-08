@@ -31,7 +31,7 @@ class TestPortlet(TestCase):
             del mapping[m]
         addview = mapping.restrictedTraverse('+/' + portlet.addview)
 
-        addview.createAndAdd(data={'header' : u"test title", 'text' : u"test text"})
+        addview.createAndAdd(data={'header' : u"test title", 'text' : u"test text", 'portlet_style': 'foobar'})
 
         self.assertEquals(len(mapping), 1)
         self.failUnless(isinstance(mapping.values()[0], static.Assignment))
@@ -68,17 +68,18 @@ class TestRenderer(TestCase):
         request = request or self.folder.REQUEST
         view = view or self.folder.restrictedTraverse('@@plone')
         manager = manager or getUtility(IPortletManager, name='plone.rightcolumn', context=self.portal)
-        assignment = assignment or static.Assignment(header=u"title", text="text")
+        assignment = assignment or static.Assignment(header=u"title", text="text", portlet_style="my-custom-style")
 
         return getMultiAdapter((context, request, view, manager, assignment), IPortletRenderer)
 
     def test_render(self):
-        r = self.renderer(context=self.portal, assignment=static.Assignment(header=u"title", text="<b>text</b>"))
+        r = self.renderer(context=self.portal, assignment=static.Assignment(header=u"title", text="<b>text</b>", portlet_style="my-custom-style"))
         r = r.__of__(self.folder)
         r.update()
         output = r.render()
         self.failUnless('title' in output)
         self.failUnless('<b>text</b>' in output)
+        self.failUnless('my-custom-style' in output)
 
     def test_hide(self):
         self.assertRaises(TypeError, static.Assignment, hide=True)
@@ -87,6 +88,11 @@ class TestRenderer(TestCase):
         r = self.renderer(context=self.portal,
                           assignment=static.Assignment(header=u"Welcome text", text="<b>text</b>"))
         self.assertEquals('portlet-static-welcome-text', r.css_class())
+
+    def test_css_class_with_portlet_style(self):
+        r = self.renderer(context=self.portal,
+                          assignment=static.Assignment(header=u"Welcome text", text="<b>text</b>", portlet_style="foo bar"))
+        self.assertEquals('portlet-static-welcome-text foo bar', r.css_class())
 
 
 def test_suite():
