@@ -5,7 +5,7 @@
     tal:attributes="class string:portlet portletStaticText ${view/css_class}"
     i18n:domain="plone">
 
-    <dt class="portletHeader">
+    <dt class="portletHeader" tal:condition="view/has_header">
         <span class="portletTopLeft"></span>
         <span>
            <a class="tile"
@@ -18,6 +18,10 @@
     </dt>
 
     <dd class="portletItem odd">
+        <tal:corners condition="not:view/has_header">
+            <span class="portletTopLeft"></span>
+            <span class="portletTopRight"></span>
+        </tal:corners>
         <div tal:replace="structure view/transformed" />
         <tal:corners condition="not:view/has_footer">
             <span class="portletBottomLeft"></span>

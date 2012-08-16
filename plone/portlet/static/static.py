@@ -29,7 +29,7 @@ class IStaticPortlet(IPortletDataProvider):
     header = schema.TextLine(
         title=_(u"Portlet header"),
         description=_(u"Title of the rendered portlet"),
-        required=True)
+        required=False)
 
     text = schema.Text(
         title=_(u"Text"),
@@ -105,6 +105,9 @@ class Renderer(base.Renderer):
 
     def has_link(self):
         return bool(self.data.more_url)
+
+    def has_header(self):
+        return bool(self.data.header)
 
     def has_footer(self):
         return bool(self.data.footer)
