@@ -81,9 +81,10 @@ class Assignment(base.Assignment):
     @property
     def title(self):
         """This property is used to give the title of the portlet in the
-        "manage portlets" screen. Here, we use the title that the user gave.
+        "manage portlets" screen. Here, we use the title that the user gave or
+        static string if title not defined.
         """
-        return self.header
+        return self.header or _(u'portlet_static', default=u"Static Portlet")
 
 
 class Renderer(base.Renderer):
@@ -100,8 +101,10 @@ class Renderer(base.Renderer):
         """Generate a CSS class from the portlet header
         """
         header = self.data.header
-        normalizer = getUtility(IIDNormalizer)
-        return "portlet-static-%s" % normalizer.normalize(header)
+        if header:
+            normalizer = getUtility(IIDNormalizer)
+            return "portlet-static-%s" % normalizer.normalize(header)
+        return "portlet-static"
 
     def has_link(self):
         return bool(self.data.more_url)
