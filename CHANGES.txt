@@ -5,6 +5,10 @@ Changelog
 2.0.2 - Unreleased
 ------------------
 
+- Adding constraint to validate white spaces
+  Fix https://dev.plone.org/ticket/13130
+  [hersonrodrigues]
+
 - Add MANIFEST.in.
   [WouterVH]
 
