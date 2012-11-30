@@ -80,6 +80,14 @@ class TestRenderer(TestCase):
         self.failUnless('title' in output)
         self.failUnless('<b>text</b>' in output)
 
+    def test_no_header(self):
+        r = self.renderer(context=self.portal, assignment=static.Assignment(text="<b>text</b>"))
+        r = r.__of__(self.folder)
+        r.update()
+        output = r.render()
+        self.assertTrue('<a class="tile"' not in output)
+        self.assertTrue('<dt class="portletHeader titleless"' in output)
+
     def test_hide(self):
         self.assertRaises(TypeError, static.Assignment, hide=True)
 

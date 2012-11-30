@@ -109,9 +109,6 @@ class Renderer(base.Renderer):
     def has_link(self):
         return bool(self.data.more_url)
 
-    def has_header(self):
-        return bool(self.data.header)
-
     def has_footer(self):
         return bool(self.data.footer)
 

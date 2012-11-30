@@ -5,23 +5,22 @@
     tal:attributes="class string:portlet portletStaticText ${view/css_class}"
     i18n:domain="plone">
 
-    <dt class="portletHeader" tal:condition="view/has_header">
+    <dt class="portletHeader"
+        tal:define="header view/data/header"
+        tal:attributes="class python:header and 'portletHeader' or 'portletHeader titleless'">
         <span class="portletTopLeft"></span>
         <span>
            <a class="tile"
+              tal:condition="header"
               tal:omit-tag="not:view/has_link"
               tal:attributes="href view/data/more_url"
-              tal:content="view/data/header"
+              tal:content="header"
               />
         </span>
         <span class="portletTopRight"></span>
     </dt>
 
     <dd class="portletItem odd">
-        <tal:corners condition="not:view/has_header">
-            <span class="portletTopLeft"></span>
-            <span class="portletTopRight"></span>
-        </tal:corners>
         <div tal:replace="structure view/transformed" />
         <tal:corners condition="not:view/has_footer">
             <span class="portletBottomLeft"></span>

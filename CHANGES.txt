@@ -5,9 +5,9 @@ Changelog
 2.0.2 - Unreleased
 ------------------
 
-- Portlet title no longer required. If empty title, rendering of the portlet
-  header is skipped.
-  [rnix]
+- Portlet title no longer required. If the title is empty, the css class
+  "titleless" is added to the header.
+  [rnix, thet]
 
 - Add MANIFEST.in.
   [WouterVH]
