@@ -9,6 +9,10 @@ Changelog
   "titleless" is added to the header.
   [rnix, thet]
 
+- Adding constraint to validate white spaces
+  Fix https://dev.plone.org/ticket/13130
+  [hersonrodrigues]
+
 - Add MANIFEST.in.
   [WouterVH]
 

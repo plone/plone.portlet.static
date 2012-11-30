@@ -1,3 +1,4 @@
+import re
 import logging
 
 from plone.i18n.normalizer.interfaces import IIDNormalizer
@@ -29,6 +30,7 @@ class IStaticPortlet(IPortletDataProvider):
     header = schema.TextLine(
         title=_(u"Portlet header"),
         description=_(u"Title of the rendered portlet"),
+        constraint=re.compile("[^\s]").match,
         required=False)
 
     text = schema.Text(
