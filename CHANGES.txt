@@ -5,6 +5,10 @@ Changelog
 2.0.2 - Unreleased
 ------------------
 
+- Portlet title no longer required. If the title is empty, the css class
+  "titleless" is added to the header.
+  [rnix, thet]
+
 - Adding constraint to validate white spaces
   Fix https://dev.plone.org/ticket/13130
   [hersonrodrigues]
