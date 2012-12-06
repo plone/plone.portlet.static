@@ -137,7 +137,9 @@ class Renderer(base.Renderer):
                                      context=context, mimetype='text/html')
         result = data.getData()
         if result:
-            return unicode(result, 'utf-8')
+            if isinstance(result, str):
+                return unicode(result, 'utf-8')
+            return result
         return None
 
 
