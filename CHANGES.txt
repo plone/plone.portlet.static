@@ -5,6 +5,10 @@ Changelog
 2.0.2 - Unreleased
 ------------------
 
+- Check if instance is str before turning to unicode as Portal_tranform itself
+  can return unicode
+  [fafhrd91]
+
 - Portlet title no longer required. If the title is empty, the css class
   "titleless" is added to the header.
   [rnix, thet]
