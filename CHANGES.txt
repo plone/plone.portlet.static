@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.0.2 - Unreleased
+2.0.2 (2013-01-13)
 ------------------
 
 - Check if instance is str before turning to unicode as Portal_tranform itself
