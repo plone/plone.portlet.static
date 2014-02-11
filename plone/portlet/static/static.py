@@ -5,10 +5,12 @@ from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.app.form.widgets.wysiwygwidget import WYSIWYGWidget
 from plone.app.portlets.portlets import base
+from plone.app.textfield import RichText
+from plone.app.textfield.value import RichTextValue
 from zope import schema
 from zope.interface import implements
 from zope.component import getUtility
-from zope.formlib import form
+from z3c.form import field
 
 from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
@@ -33,7 +35,7 @@ class IStaticPortlet(IPortletDataProvider):
         constraint=re.compile("[^\s]").match,
         required=False)
 
-    text = schema.Text(
+    text = RichText(
         title=_(u"Text"),
         description=_(u"The text to render"),
         required=True)
@@ -120,6 +122,10 @@ class Renderer(base.Renderer):
         """
         orig = self.data.text
         context = aq_inner(self.context)
+
+        if isinstance(orig, RichTextValue):
+            orig = orig.raw
+
         if not isinstance(orig, unicode):
             # Apply a potentially lossy transformation, and hope we stored
             # utf-8 text. There were bugs in earlier versions of this portlet
@@ -150,8 +156,7 @@ class AddForm(base.AddForm):
     zope.formlib which fields to display. The create() method actually
     constructs the assignment that is being added.
     """
-    form_fields = form.Fields(IStaticPortlet)
-    form_fields['text'].custom_widget = WYSIWYGWidget
+    fields = field.Fields(IStaticPortlet)
     label = _(u"title_add_static_portlet", default=u"Add static text portlet")
     description = _(u"description_static_portlet",
         default=u"A portlet which can display static HTML text.")
@@ -166,8 +171,7 @@ class EditForm(base.EditForm):
     This is registered with configure.zcml. The form_fields variable tells
     zope.formlib which fields to display.
     """
-    form_fields = form.Fields(IStaticPortlet)
-    form_fields['text'].custom_widget = WYSIWYGWidget
+    fields = field.Fields(IStaticPortlet)
     label = _(u"title_edit_static_portlet", default=u"Edit static text portlet")
     description = _(u"description_static_portlet",
         default=u"A portlet which can display static HTML text.")
