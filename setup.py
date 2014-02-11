@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-version = '2.0.3.dev0'
+version = '3.0.dev0'
 
 long_description = (
     read('README.txt')
@@ -47,10 +47,9 @@ setup(name='plone.portlet.static',
           'setuptools',
           "plone.portlets",
           "plone.app.portlets",
-          "plone.app.form>=1.1",
+          "plone.app.textfield",
           "plone.i18n",
           'zope.component',
-          'zope.formlib',
           'zope.i18nmessageid',
           'zope.interface',
           'zope.schema',
