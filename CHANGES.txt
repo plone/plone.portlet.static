@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-3.0 (unreleased)
-----------------
+33.0.0 (2014-04-13)
+-------------------
 
 - Use z3c.form for the portlet forms.
   [bosim, davisagli]
