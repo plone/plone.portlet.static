@@ -1,3 +1,9 @@
+
+from plone.app.testing import login
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.app.testing import TEST_USER_NAME
+
 from plone.portlets.interfaces import IPortletType
 from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletAssignment
@@ -7,13 +13,20 @@ from plone.app.portlets.storage import PortletAssignmentMapping
 from zope.component import getUtility, getMultiAdapter
 
 from plone.portlet.static import static
-from plone.portlet.static.tests.base import TestCase
+from plone.portlet.static.testing import PLONEPORTLETSTATIC_INTEGRATION_TESTING
+
+import unittest2 as unittest
 
 
-class TestPortlet(TestCase):
+class TestPortlet(unittest.TestCase):
 
-    def afterSetUp(self):
-        self.setRoles(('Manager', ))
+    layer = PLONEPORTLETSTATIC_INTEGRATION_TESTING
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.folder = getattr(self.portal, 'test-folder')
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        login(self.portal, TEST_USER_NAME)
 
     def testPortletTypeRegistered(self):
         portlet = getUtility(IPortletType, name='plone.portlet.static.Static')
@@ -31,7 +44,7 @@ class TestPortlet(TestCase):
             del mapping[m]
         addview = mapping.restrictedTraverse('+/' + portlet.addview)
 
-        addview.createAndAdd(data={'header' : u"test title", 'text' : u"test text"})
+        addview.createAndAdd(data={'header': u"test title", 'text': u"test text"})
 
         self.assertEquals(len(mapping), 1)
         self.failUnless(isinstance(mapping.values()[0], static.Assignment))
@@ -58,10 +71,15 @@ class TestPortlet(TestCase):
                         "Renderer should be available by default.")
 
 
-class TestRenderer(TestCase):
+class TestRenderer(unittest.TestCase):
 
-    def afterSetUp(self):
-        self.setRoles(('Manager', ))
+    layer = PLONEPORTLETSTATIC_INTEGRATION_TESTING
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.folder = getattr(self.portal, 'test-folder')
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        login(self.portal, TEST_USER_NAME)
 
     def renderer(self, context=None, request=None, view=None, manager=None, assignment=None):
         context = context or self.folder
