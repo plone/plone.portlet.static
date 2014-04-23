@@ -87,8 +87,9 @@ class TestRenderer(unittest.TestCase):
         view = view or self.folder.restrictedTraverse('@@plone')
         manager = manager or getUtility(IPortletManager, name='plone.rightcolumn', context=self.portal)
         assignment = assignment or static.Assignment(header=u"title", text="text")
-
-        return getMultiAdapter((context, request, view, manager, assignment), IPortletRenderer)
+        r = getMultiAdapter((context, request, view, manager, assignment), IPortletRenderer)
+        r.__portlet_metadata__ = {'key': '/'.join(self.portal.getPhysicalPath())}
+        return r
 
     def test_render(self):
         r = self.renderer(context=self.portal, assignment=static.Assignment(header=u"title", text="<b>text</b>"))
@@ -113,6 +114,14 @@ class TestRenderer(unittest.TestCase):
         r = self.renderer(context=self.portal,
                           assignment=static.Assignment(header=u"Welcome text", text="<b>text</b>"))
         self.assertEquals('portlet-static-welcome-text', r.css_class())
+    
+    def test_relative_link(self):
+        folder_id = self.portal.invokeFactory('Folder', id='folder1', title='My Folder Title')
+        r = self.renderer(context=self.portal[folder_id], assignment=static.Assignment(text="""<a href="relative/link">link</a>"""))
+        r = r.__of__(self.folder)
+        r.update()
+        output = r.render()
+        self.assertTrue("http://nohost/plone/relative/link" in output)
 
 
 def test_suite():
