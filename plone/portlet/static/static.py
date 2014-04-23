@@ -133,8 +133,10 @@ class Renderer(base.Renderer):
         orig = orig.encode('utf-8')
 
         transformer = getToolByName(context, 'portal_transforms')
+        assignment_context_path = self.__portlet_metadata__['key']
+        assignment_context = context.restrictedTraverse(assignment_context_path)
         data = transformer.convertTo(mt, orig,
-                                     context=context, mimetype='text/html')
+                                     context=assignment_context, mimetype='text/html')
         result = data.getData()
         if result:
             if isinstance(result, str):
