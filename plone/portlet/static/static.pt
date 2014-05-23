@@ -1,11 +1,11 @@
 <div tal:condition="view/data/omit_border"
      tal:attributes="class string:portletStaticText ${view/css_class}"
      tal:content="structure view/transformed" />
-<dl tal:condition="not:view/data/omit_border"
+<div tal:condition="not:view/data/omit_border"
     tal:attributes="class string:portlet portletStaticText ${view/css_class}"
     i18n:domain="plone">
 
-    <dt class="portletHeader"
+    <strong class="portletHeader"
         tal:define="header view/data/header"
         tal:attributes="class python:header and 'portletHeader' or 'portletHeader titleless'">
         <span class="portletTopLeft"></span>
@@ -18,17 +18,17 @@
               />
         </span>
         <span class="portletTopRight"></span>
-    </dt>
+    </strong>
 
-    <dd class="portletItem odd">
+    <div class="portletContent">
         <div tal:replace="structure view/transformed" />
         <tal:corners condition="not:view/has_footer">
             <span class="portletBottomLeft"></span>
             <span class="portletBottomRight"></span>
         </tal:corners>
-    </dd>
+    </div>
     
-    <dd class="portletFooter" tal:condition="view/has_footer">
+    <footer class="portletFooter" tal:condition="view/has_footer">
         <span class="portletBottomLeft"></span>
         <span>
            <a class="tile"
@@ -38,6 +38,6 @@
               />
         </span>
         <span class="portletBottomRight"></span>
-    </dd>
+    </footer>
 
-</dl>
+</div>
