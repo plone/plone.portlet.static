@@ -5,7 +5,10 @@ Changelog
 3.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix the relative url transformation.
+  The 'safe_html' transformation has to be called with 'assignment context'
+  instead of 'display context'.
+  [sverbois]
 
 
 3.0.0 (2014-04-13)
