@@ -10,8 +10,6 @@ version = '3.0.1.dev0'
 long_description = (
     read('README.txt')
     + '\n' +
-#    read('plone', 'portlet', 'static', 'README.txt')
-#    + '\n' +
     read('CHANGES.txt')
     + '\n'
     )
@@ -28,7 +26,7 @@ setup(name='plone.portlet.static',
           "License :: OSI Approved :: GNU General Public License (GPL)",
           "Operating System :: OS Independent",
           "Programming Language :: Python",
-        ],
+      ],
       keywords='plone portlet static',
       author='Plone Foundation',
       author_email='plone-developers@lists.sourceforge.net',
@@ -39,9 +37,9 @@ setup(name='plone.portlet.static',
       include_package_data=True,
       zip_safe=False,
       extras_require=dict(
-        test=[
-            'Products.PloneTestCase',
-        ]
+          test=[
+              'plone.app.testing',
+          ]
       ),
       install_requires=[
           'setuptools',
