@@ -114,7 +114,7 @@ class TestRenderer(unittest.TestCase):
         r = self.renderer(context=self.portal,
                           assignment=static.Assignment(header=u"Welcome text", text="<b>text</b>"))
         self.assertEquals('portlet-static-welcome-text', r.css_class())
-    
+
     def test_relative_link(self):
         folder_id = self.portal.invokeFactory('Folder', id='folder1', title='My Folder Title')
         r = self.renderer(context=self.portal[folder_id], assignment=static.Assignment(text="""<a href="relative/link">link</a>"""))

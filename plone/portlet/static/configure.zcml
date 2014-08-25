@@ -6,7 +6,7 @@
     i18n_domain="plone">
 
     <five:registerPackage package="." />
-    
+
     <genericsetup:registerProfile
        name="default"
        title="Static text portlet"
@@ -14,12 +14,12 @@
        description="A simple portlet that displays static HTML"
        provides="Products.GenericSetup.interfaces.EXTENSION"
        />
-       
+
      <permission
        id="plone.portlet.static.AddStaticPortlet"
        title="plone.portlet.static: Add static portlet"
        />
- 
+
      <!-- Register the portlet -->
      <plone:portlet
          name="plone.portlet.static.Static"

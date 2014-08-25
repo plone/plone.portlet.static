@@ -27,7 +27,7 @@
             <span class="portletBottomRight"></span>
         </tal:corners>
     </dd>
-    
+
     <dd class="portletFooter" tal:condition="view/has_footer">
         <span class="portletBottomLeft"></span>
         <span>

@@ -102,7 +102,7 @@ Changelog
 - Specify package dependencies.
   [hannosch]
 
-- Added 'tile' CSS class to the links within dt.portletHeader and 
+- Added 'tile' CSS class to the links within dt.portletHeader and
   dd.portletFooter for static portlet's template
   [spliter]
 
