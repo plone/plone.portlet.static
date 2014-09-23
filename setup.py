@@ -8,16 +8,16 @@ def read(*rnames):
 version = '3.0.1.dev0'
 
 long_description = (
-    read('README.txt')
+    read('README.rst')
     + '\n' +
-    read('CHANGES.txt')
+    read('CHANGES.rst')
     + '\n'
     )
 
 
 setup(name='plone.portlet.static',
       version=version,
-      description="A simple static HTML portlet for Plone.",
+      description="An editable static HTML portlet for Plone.",
       long_description=long_description,
       classifiers=[
           "Environment :: Web Environment",
