@@ -5,6 +5,9 @@ Changelog
 3.0.1 (unreleased)
 ------------------
 
+- Replace DL/DT/DD in portlet with more semantic markup (see PR #7).
+  [khink]
+
 - Fix the relative url transformation.
   The 'safe_html' transformation has to be called with 'assignment context'
   instead of 'display context'.
