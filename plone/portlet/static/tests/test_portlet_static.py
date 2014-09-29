@@ -135,7 +135,7 @@ class TestRenderer(unittest.TestCase):
         r.update()
         output = r.render()
         self.assertTrue('<a class="tile"' not in output)
-        self.assertTrue('<strong class="portletHeader titleless"' in output)
+        self.assertTrue('<header class="portletHeader titleless"' in output)
 
     def test_hide(self):
         self.assertRaises(TypeError, static.Assignment, hide=True)
