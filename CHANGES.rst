@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-3.0.1 (unreleased)
+3.0.1 (2014-10-23)
 ------------------
 
 - Replace DL/DT/DD in portlet with more semantic markup (see PR #7).
