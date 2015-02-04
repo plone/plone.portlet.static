@@ -5,8 +5,9 @@ Changelog
 2.0.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Check that renderer has a '__portlet_metadata__' attribute
+  and compute 'assignment context' only for 'context' portlet.
+  [sverbois]
 
 2.0.3 (2014-10-13)
 ------------------
@@ -101,7 +102,7 @@ Changelog
 - Specify package dependencies.
   [hannosch]
 
-- Added 'tile' CSS class to the links within dt.portletHeader and 
+- Added 'tile' CSS class to the links within dt.portletHeader and
   dd.portletFooter for static portlet's template
   [spliter]
 
