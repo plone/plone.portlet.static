@@ -141,7 +141,8 @@ class Renderer(base.Renderer):
         transformer = getToolByName(context, 'portal_transforms')
         transformer_context = context
         if hasattr(self, '__portlet_metadata__'):
-            if self.__portlet_metadata__['category'] == 'context':
+            if ('category' in self.__portlet_metadata__ and
+                    self.__portlet_metadata__['category'] == 'context'):
                 assignment_context_path = self.__portlet_metadata__['key']
                 assignment_context = context.unrestrictedTraverse(assignment_context_path)
                 transformer_context = assignment_context
