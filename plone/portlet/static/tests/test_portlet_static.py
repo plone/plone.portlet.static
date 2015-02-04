@@ -163,6 +163,8 @@ class TestRenderer(unittest.TestCase):
             )
         )
         r = r.__of__(self.folder)
+        r.__portlet_metadata__ = dict(
+            category='context', key='/'.join(self.portal.getPhysicalPath()))
         r.update()
         output = r.render()
         self.assertTrue("http://nohost/plone/relative/link" in output)

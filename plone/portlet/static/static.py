@@ -139,16 +139,14 @@ class Renderer(base.Renderer):
         orig = orig.encode('utf-8')
 
         transformer = getToolByName(context, 'portal_transforms')
-        assignment_context_path = self.__portlet_metadata__['key']
-        assignment_context = context.restrictedTraverse(
-            assignment_context_path
-        )
-        data = transformer.convertTo(
-            mt,
-            orig,
-            context=assignment_context,
-            mimetype='text/html'
-        )
+        transformer_context = context
+        if hasattr(self, '__portlet_metadata__'):
+            if self.__portlet_metadata__['category'] == 'context':
+                assignment_context_path = self.__portlet_metadata__['key']
+                assignment_context = context.unrestrictedTraverse(assignment_context_path)
+                transformer_context = assignment_context
+        data = transformer.convertTo(mt, orig,
+                                     context=transformer_context, mimetype='text/html')
         result = data.getData()
         if result:
             if isinstance(result, str):
