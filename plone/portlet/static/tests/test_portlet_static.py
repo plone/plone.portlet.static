@@ -21,7 +21,6 @@ class TestPortlet(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer['portal']
-        self.folder = getattr(self.portal, 'test-folder')
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         login(self.portal, TEST_USER_NAME)
 
@@ -52,16 +51,16 @@ class TestPortlet(unittest.TestCase):
 
     def testInvokeEditView(self):
         mapping = PortletAssignmentMapping()
-        request = self.folder.REQUEST
+        request = self.portal.REQUEST
 
         mapping['foo'] = static.Assignment(header=u"title", text="text")
         editview = getMultiAdapter((mapping['foo'], request), name='edit')
         self.failUnless(isinstance(editview, static.EditForm))
 
     def testRenderer(self):
-        context = self.folder
-        request = self.folder.REQUEST
-        view = self.folder.restrictedTraverse('@@plone')
+        context = self.portal
+        request = self.portal.REQUEST
+        view = self.portal.restrictedTraverse('@@plone')
         manager = getUtility(
             IPortletManager,
             name='plone.rightcolumn',
@@ -85,15 +84,14 @@ class TestRenderer(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer['portal']
-        self.folder = getattr(self.portal, 'test-folder')
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         login(self.portal, TEST_USER_NAME)
 
     def renderer(self, context=None, request=None, view=None, manager=None,
                  assignment=None):
-        context = context or self.folder
-        request = request or self.folder.REQUEST
-        view = view or self.folder.restrictedTraverse('@@plone')
+        context = context or self.portal
+        request = request or self.portal.REQUEST
+        view = view or self.portal.restrictedTraverse('@@plone')
         manager = manager or getUtility(
             IPortletManager,
             name='plone.rightcolumn',
@@ -120,7 +118,7 @@ class TestRenderer(unittest.TestCase):
                 text="<b>text</b>"
             )
         )
-        r = r.__of__(self.folder)
+        r = r.__of__(self.portal)
         r.update()
         output = r.render()
         self.failUnless('title' in output)
@@ -131,7 +129,7 @@ class TestRenderer(unittest.TestCase):
             context=self.portal,
             assignment=static.Assignment(text="<b>text</b>")
         )
-        r = r.__of__(self.folder)
+        r = r.__of__(self.portal)
         r.update()
         output = r.render()
         self.assertTrue('<a class="tile"' not in output)
@@ -151,18 +149,13 @@ class TestRenderer(unittest.TestCase):
         self.assertEquals('portlet-static-welcome-text', r.css_class())
 
     def test_relative_link(self):
-        folder_id = self.portal.invokeFactory(
-            'Folder',
-            id='folder1',
-            title='My Folder Title'
-        )
         r = self.renderer(
-            context=self.portal[folder_id],
+            context=self.portal,
             assignment=static.Assignment(
                 text="""<a href="relative/link">link</a>"""
             )
         )
-        r = r.__of__(self.folder)
+        r = r.__of__(self.portal)
         r.__portlet_metadata__ = dict(
             category='context', key='/'.join(self.portal.getPhysicalPath()))
         r.update()
