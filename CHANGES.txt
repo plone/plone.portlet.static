@@ -1,13 +1,13 @@
 Changelog
 =========
 
-
 2.0.4 (unreleased)
 ------------------
 
 - Check that renderer has a '__portlet_metadata__' attribute
   and compute 'assignment context' only for 'context' portlet.
   [sverbois]
+
 
 2.0.3 (2014-10-13)
 ------------------
