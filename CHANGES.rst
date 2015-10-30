@@ -5,7 +5,9 @@ Changelog
 3.0.2 (2015-03-13)
 ------------------
 
-- Clean up test setup.
+Fixes:
+
+- Cleaned up test setup.
   [timo]
 
 - Check that renderer has a '__portlet_metadata__' attribute
