@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import getFSVersionTuple
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.portlets.portlets import base
 from plone.app.textfield import RichText
@@ -15,6 +16,15 @@ import logging
 import re
 
 logger = logging.getLogger('plone.portlet.static')
+PLONE5 = getFSVersionTuple()[0] >= 5
+
+if PLONE5:
+    base_AddForm = base.AddForm
+    base_EditForm = base.EditForm
+else:
+    from plone.app.portlets.browser.z3cformhelper import AddForm as base_AddForm  # noqa
+    from plone.app.portlets.browser.z3cformhelper import EditForm as base_EditForm  # noqa
+    from z3c.form import field
 
 
 class IStaticPortlet(IPortletDataProvider):
@@ -156,14 +166,18 @@ class Renderer(base.Renderer):
         return None
 
 
-class AddForm(base.AddForm):
+class AddForm(base_AddForm):
     """Portlet add form.
 
     This is registered in configure.zcml. The form_fields variable tells
     zope.formlib which fields to display. The create() method actually
     constructs the assignment that is being added.
     """
-    schema = IStaticPortlet
+    if PLONE5:
+        schema = IStaticPortlet
+    else:
+        fields = field.Fields(IStaticPortlet)
+
     label = _(u"title_add_static_portlet", default=u"Add static text portlet")
     description = _(
         u"description_static_portlet",
@@ -174,13 +188,17 @@ class AddForm(base.AddForm):
         return Assignment(**data)
 
 
-class EditForm(base.EditForm):
+class EditForm(base_EditForm):
     """Portlet edit form.
 
     This is registered with configure.zcml. The form_fields variable tells
     zope.formlib which fields to display.
     """
-    schema = IStaticPortlet
+    if PLONE5:
+        schema = IStaticPortlet
+    else:
+        fields = field.Fields(IStaticPortlet)
+
     label = _(
         u"title_edit_static_portlet",
         default=u"Edit static text portlet"
