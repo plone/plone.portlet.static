@@ -5,6 +5,8 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.portlets.portlets import base
 from plone.app.textfield import RichText
 from plone.app.textfield.value import RichTextValue
+from plone.app.widgets.dx import RichTextFieldWidget
+from plone.autoform import directives
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.portlet.static import PloneMessageFactory as _
 from plone.portlets.interfaces import IPortletDataProvider
@@ -13,6 +15,9 @@ from zope.component import getUtility
 from zope.interface import implementer
 import logging
 import re
+
+from plone.portlet.static.formhelper import AddForm
+from plone.portlet.static.formhelper import EditForm
 
 logger = logging.getLogger('plone.portlet.static')
 
@@ -31,6 +36,7 @@ class IStaticPortlet(IPortletDataProvider):
         constraint=re.compile("[^\s]").match,
         required=False)
 
+    directives.widget(text=RichTextFieldWidget)
     text = RichText(
         title=_(u"Text"),
         description=_(u"The text to render"),
@@ -156,7 +162,7 @@ class Renderer(base.Renderer):
         return None
 
 
-class AddForm(base.AddForm):
+class AddForm(AddForm):
     """Portlet add form.
 
     This is registered in configure.zcml. The form_fields variable tells
@@ -174,7 +180,7 @@ class AddForm(base.AddForm):
         return Assignment(**data)
 
 
-class EditForm(base.EditForm):
+class EditForm(EditForm):
     """Portlet edit form.
 
     This is registered with configure.zcml. The form_fields variable tells
