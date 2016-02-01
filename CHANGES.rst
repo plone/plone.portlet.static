@@ -14,6 +14,9 @@ Fixes:
   and compute 'assignment context' only for 'context' portlet.
   [sverbois]
 
+- Plone 4 compatibility.
+  [thet]
+
 
 3.0.1 (2014-10-23)
 ------------------
