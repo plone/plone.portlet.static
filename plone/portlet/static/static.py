@@ -6,6 +6,8 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.portlets.portlets import base
 from plone.app.textfield import RichText
 from plone.app.textfield.value import RichTextValue
+from plone.autoform import directives
+from plone.autoform.form import AutoExtensibleForm
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.portlet.static import PloneMessageFactory as _
 from plone.portlets.interfaces import IPortletDataProvider
@@ -16,15 +18,35 @@ import logging
 import re
 
 logger = logging.getLogger('plone.portlet.static')
+WIDGETS_1X = False
 PLONE5 = getFSVersionTuple()[0] >= 5
 
 if PLONE5:
+    from plone.app.z3cform.widget import RichTextFieldWidget
     base_AddForm = base.AddForm
     base_EditForm = base.EditForm
 else:
-    from plone.app.portlets.browser.z3cformhelper import AddForm as base_AddForm  # noqa
-    from plone.app.portlets.browser.z3cformhelper import EditForm as base_EditForm  # noqa
+    # PLONE 4 Support:
+    # Either Plone 4 plus compatible plone.app.widgets, or Plone 4.x without:
+    from plone.app.portlets.browser import z3cformhelper
     from z3c.form import field
+    try:
+        from plone.app.widgets.dx import RichTextFieldWidget  # req >= 1.9.1+
+
+        class base_AddForm(AutoExtensibleForm, z3cformhelper.AddForm):
+            pass
+
+        class base_EditForm(AutoExtensibleForm, z3cformhelper.EditForm):
+            pass
+
+        WIDGETS_1X = True
+    except ImportError:
+        WIDGETS_1X = False
+        base_AddForm = z3cformhelper.AddForm
+        base_EditForm = z3cformhelper.EditForm
+
+
+USE_AUTOFORM = PLONE5 or WIDGETS_1X
 
 
 class IStaticPortlet(IPortletDataProvider):
@@ -41,6 +63,7 @@ class IStaticPortlet(IPortletDataProvider):
         constraint=re.compile("[^\s]").match,
         required=False)
 
+    directives.widget(text=RichTextFieldWidget)
     text = RichText(
         title=_(u"Text"),
         description=_(u"The text to render"),
@@ -173,7 +196,7 @@ class AddForm(base_AddForm):
     zope.formlib which fields to display. The create() method actually
     constructs the assignment that is being added.
     """
-    if PLONE5:
+    if USE_AUTOFORM:
         schema = IStaticPortlet
     else:
         fields = field.Fields(IStaticPortlet)
@@ -194,7 +217,7 @@ class EditForm(base_EditForm):
     This is registered with configure.zcml. The form_fields variable tells
     zope.formlib which fields to display.
     """
-    if PLONE5:
+    if USE_AUTOFORM:
         schema = IStaticPortlet
     else:
         fields = field.Fields(IStaticPortlet)

@@ -7,7 +7,14 @@ Changelog
 
 New:
 
-- *add item here*
+- Attempt to use AutoExtensibleForm for as base for static portlet forms
+  when Plone 4 site also has recent plone.app.widgets; this should be
+  consistent in portlet with how TinyMCE is configured for Dexterity
+  content.  This approach attempts to harmonize Plone 4 compatibillity
+  work done previously by @thet and @cdw9 -- supporting Plone 4, either
+  with/without plone.app.widgets, and with/without plone.app.contenttypes
+  (provided recent plone.app.widgets is used).
+  [seanupton]
 
 Fixes:
 
