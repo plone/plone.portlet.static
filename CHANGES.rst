@@ -16,10 +16,6 @@ New:
   (provided recent plone.app.widgets is used).
   [seanupton]
 
-Fixes:
-
-- *add item here*
-
 
 3.0.2 (2016-02-14)
 ------------------
