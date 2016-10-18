@@ -192,8 +192,7 @@ class Renderer(base.Renderer):
 class AddForm(base_AddForm):
     """Portlet add form.
 
-    This is registered in configure.zcml. The form_fields variable tells
-    zope.formlib which fields to display. The create() method actually
+    This is registered in configure.zcml. The create() method actually
     constructs the assignment that is being added.
     """
     if USE_AUTOFORM:
@@ -212,10 +211,9 @@ class AddForm(base_AddForm):
 
 
 class EditForm(base_EditForm):
-    """Portlet edit form.
+    """Portlet edit form
 
-    This is registered with configure.zcml. The form_fields variable tells
-    zope.formlib which fields to display.
+    This is registered in configure.zcml.
     """
     if USE_AUTOFORM:
         schema = IStaticPortlet
