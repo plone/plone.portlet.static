@@ -118,7 +118,6 @@ class TestRenderer(unittest.TestCase):
                 text="<b>text</b>"
             )
         )
-        r = r.__of__(self.portal)
         r.update()
         output = r.render()
         self.failUnless('title' in output)
@@ -129,7 +128,6 @@ class TestRenderer(unittest.TestCase):
             context=self.portal,
             assignment=static.Assignment(text="<b>text</b>")
         )
-        r = r.__of__(self.portal)
         r.update()
         output = r.render()
         self.assertTrue('<a class="tile"' not in output)
@@ -155,7 +153,6 @@ class TestRenderer(unittest.TestCase):
                 text="""<a href="relative/link">link</a>"""
             )
         )
-        r = r.__of__(self.portal)
         r.__portlet_metadata__ = dict(
             category='context', key='/'.join(self.portal.getPhysicalPath()))
         r.update()

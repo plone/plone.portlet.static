@@ -15,7 +15,8 @@ New features:
 
 Bug fixes:
 
-- *add item here*
+- Fix test. Portletrenderer can't be wrapped in aq.
+  [pbauer]
 
 
 3.1.1 (2017-07-03)
