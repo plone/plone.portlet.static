@@ -47,7 +47,7 @@ class TestPortlet(unittest.TestCase):
         )
 
         self.assertEquals(len(mapping), 1)
-        self.failUnless(isinstance(mapping.values()[0], static.Assignment))
+        self.failUnless(isinstance(list(mapping.values())[0], static.Assignment))
 
     def testInvokeEditView(self):
         mapping = PortletAssignmentMapping()

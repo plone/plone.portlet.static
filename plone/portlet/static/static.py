@@ -16,6 +16,8 @@ from zope.component import getUtility
 from zope.interface import implementer
 import logging
 import re
+import six
+
 
 logger = logging.getLogger('plone.portlet.static')
 WIDGETS_1X = False
@@ -157,14 +159,14 @@ class Renderer(base.Renderer):
         if isinstance(orig, RichTextValue):
             orig = orig.raw
 
-        if not isinstance(orig, unicode):
+        if not isinstance(orig, six.text_type):
             # Apply a potentially lossy transformation, and hope we stored
             # utf-8 text. There were bugs in earlier versions of this portlet
             # which stored text directly as sent by the browser, which could
             # be any encoding in the world.
-            orig = unicode(orig, 'utf-8', 'ignore')
+            orig = six.text_type(orig, 'utf-8', 'ignore')
             logger.warn(
-                "Static portlet at %s has stored non-unicode text. "
+                "Static portlet at %s has stored non-six.text_type text. "
                 "Assuming utf-8 encoding." % context.absolute_url()
             )
 
@@ -184,7 +186,7 @@ class Renderer(base.Renderer):
         result = data.getData()
         if result:
             if isinstance(result, str):
-                return unicode(result, 'utf-8')
+                return six.text_type(result, 'utf-8')
             return result
         return None
 

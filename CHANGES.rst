@@ -18,6 +18,9 @@ Bug fixes:
 - Fix test. Portletrenderer can't be wrapped in aq.
   [pbauer]
 
+- Add Python 2 / 3 compatibility
+  [vincero]
+
 
 3.1.1 (2017-07-03)
 ------------------
