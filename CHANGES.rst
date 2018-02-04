@@ -5,14 +5,6 @@ Changelog
 3.1.2 (unreleased)
 ------------------
 
-Breaking changes:
-
-- *add item here*
-
-New features:
-
-- *add item here*
-
 Bug fixes:
 
 - Fix test. Portletrenderer can't be wrapped in aq.
