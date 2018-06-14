@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_inner
-from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone.utils import getFSVersionTuple
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.portlets.portlets import base
 from plone.app.textfield import RichText
 from plone.app.textfield.value import RichTextValue
@@ -11,9 +8,14 @@ from plone.autoform.form import AutoExtensibleForm
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.portlet.static import PloneMessageFactory as _
 from plone.portlets.interfaces import IPortletDataProvider
+from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import getFSVersionTuple
+from Products.CMFPlone.utils import safe_unicode
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope import schema
 from zope.component import getUtility
 from zope.interface import implementer
+
 import logging
 import re
 import six
@@ -164,14 +166,15 @@ class Renderer(base.Renderer):
             # utf-8 text. There were bugs in earlier versions of this portlet
             # which stored text directly as sent by the browser, which could
             # be any encoding in the world.
-            orig = six.text_type(orig, 'utf-8', 'ignore')
+            orig = safe_unicode(orig)
             logger.warn(
-                "Static portlet at %s has stored non-six.text_type text. "
+                "Static portlet at %s has not stored text/unicode. "
                 "Assuming utf-8 encoding." % context.absolute_url()
             )
 
-        # Portal transforms needs encoded strings
-        orig = orig.encode('utf-8')
+        # Portal transforms on py2 needs encoded strings
+        if six.PY2 and isinstance(orig, six.text_type):
+            orig = orig.encode('utf-8')
 
         transformer = getToolByName(context, 'portal_transforms')
         transformer_context = context
@@ -185,9 +188,7 @@ class Renderer(base.Renderer):
                                      context=transformer_context, mimetype='text/html')
         result = data.getData()
         if result:
-            if isinstance(result, str):
-                return six.text_type(result, 'utf-8')
-            return result
+            return safe_unicode(result)
         return None
 
 
