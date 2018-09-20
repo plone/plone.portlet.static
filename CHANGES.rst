@@ -15,7 +15,8 @@ New features:
 
 Bug fixes:
 
-- *add item here*
+- Fix static portlet for py3
+  [pbauer]
 
 
 3.1.2 (2018-02-05)
