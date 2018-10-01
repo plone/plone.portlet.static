@@ -37,7 +37,7 @@ setup(
     keywords='plone portlet static',
     author='Plone Foundation',
     author_email='plone-developers@lists.sourceforge.net',
-    url='https://pypi.python.org/pypi/plone.portlet.static',
+    url='https://pypi.org/project/plone.portlet.static',
     license='GPL version 2',
     packages=find_packages(exclude=['ez_setup']),
     namespace_packages=["plone", 'plone.portlet'],
