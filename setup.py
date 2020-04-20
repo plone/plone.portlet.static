@@ -8,11 +8,11 @@ def read(*rnames):
 version = '2.0.5.dev0'
 
 long_description = (
-    read('README.txt')
+    read('README.rst')
     + '\n' +
-#    read('plone', 'portlet', 'static', 'README.txt')
+#    read('plone', 'portlet', 'static', 'README.rst')
 #    + '\n' +
-    read('CHANGES.txt')
+    read('CHANGES.rst')
     + '\n'
     )
 
@@ -22,12 +22,15 @@ setup(name='plone.portlet.static',
       description="A simple static HTML portlet for Plone.",
       long_description=long_description,
       classifiers=[
+          "Development Status :: 5 - Production/Stable",
           "Environment :: Web Environment",
           "Framework :: Plone",
+          "Framework :: Plone :: 4.3",
           "Framework :: Zope2",
           "License :: OSI Approved :: GNU General Public License (GPL)",
           "Operating System :: OS Independent",
           "Programming Language :: Python",
+          "Programming Language :: Python :: 2.7",
         ],
       keywords='plone portlet static',
       author='Plone Foundation',

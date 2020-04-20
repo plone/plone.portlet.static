@@ -173,7 +173,7 @@ Changelog
 1.1rc2 - 2008-03-26
 -------------------
 
-- Use README.txt and HISTORY.txt as the package's long description and
+- Use README.rst and HISTORY.txt as the package's long description and
   add missing history entries for all releases.
   [wichert]
 
