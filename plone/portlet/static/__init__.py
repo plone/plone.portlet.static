@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-from Products.CMFCore.permissions import setDefaultRoles
+from AccessControl.Permission import addPermission
 from zope.i18nmessageid import MessageFactory
+
 
 PloneMessageFactory = MessageFactory('plone')
 
-setDefaultRoles(
+addPermission(
     'plone.portlet.static: Add static portlet',
     ('Manager', 'Site Administrator', 'Owner', )
 )
