@@ -9,6 +9,16 @@ Changelog
 
 .. towncrier release notes start
 
+3.1.5 (2020-09-07)
+------------------
+
+Bug fixes:
+
+
+- Fixed startup warning for setDefaultRoles.
+  [maurits] (#17)
+
+
 3.1.4 (2020-04-21)
 ------------------
 
