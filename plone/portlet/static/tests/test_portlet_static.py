@@ -26,12 +26,12 @@ class TestPortlet(unittest.TestCase):
 
     def testPortletTypeRegistered(self):
         portlet = getUtility(IPortletType, name='plone.portlet.static.Static')
-        self.assertEquals(portlet.addview, 'plone.portlet.static.Static')
+        self.assertEqual(portlet.addview, 'plone.portlet.static.Static')
 
     def testInterfaces(self):
         portlet = static.Assignment(header=u"title", text="text")
-        self.failUnless(IPortletAssignment.providedBy(portlet))
-        self.failUnless(IPortletDataProvider.providedBy(portlet.data))
+        self.assertTrue(IPortletAssignment.providedBy(portlet))
+        self.assertTrue(IPortletDataProvider.providedBy(portlet.data))
 
     def testInvokeAddview(self):
         portlet = getUtility(IPortletType, name='plone.portlet.static.Static')
@@ -46,8 +46,8 @@ class TestPortlet(unittest.TestCase):
             data={'header': u"test title", 'text': u"test text"}
         )
 
-        self.assertEquals(len(mapping), 1)
-        self.failUnless(isinstance(list(mapping.values())[0], static.Assignment))
+        self.assertEqual(len(mapping), 1)
+        self.assertTrue(isinstance(list(mapping.values())[0], static.Assignment))
 
     def testInvokeEditView(self):
         mapping = PortletAssignmentMapping()
@@ -55,7 +55,7 @@ class TestPortlet(unittest.TestCase):
 
         mapping['foo'] = static.Assignment(header=u"title", text="text")
         editview = getMultiAdapter((mapping['foo'], request), name='edit')
-        self.failUnless(isinstance(editview, static.EditForm))
+        self.assertTrue(isinstance(editview, static.EditForm))
 
     def testRenderer(self):
         context = self.portal
@@ -72,9 +72,9 @@ class TestPortlet(unittest.TestCase):
             (context, request, view, manager, assignment),
             IPortletRenderer
         )
-        self.failUnless(isinstance(renderer, static.Renderer))
+        self.assertTrue(isinstance(renderer, static.Renderer))
 
-        self.failUnless(renderer.available,
+        self.assertTrue(renderer.available,
                         "Renderer should be available by default.")
 
 
@@ -120,8 +120,8 @@ class TestRenderer(unittest.TestCase):
         )
         r.update()
         output = r.render()
-        self.failUnless('title' in output)
-        self.failUnless('<b>text</b>' in output)
+        self.assertTrue('title' in output)
+        self.assertTrue('<b>text</b>' in output)
 
     def test_no_header(self):
         r = self.renderer(
@@ -144,7 +144,7 @@ class TestRenderer(unittest.TestCase):
                 text="<b>text</b>"
             )
         )
-        self.assertEquals('portlet-static-welcome-text', r.css_class())
+        self.assertEqual('portlet-static-welcome-text', r.css_class())
 
     def test_relative_link(self):
         r = self.renderer(
