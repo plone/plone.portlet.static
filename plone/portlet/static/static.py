@@ -64,7 +64,7 @@ class IStaticPortlet(IPortletDataProvider):
     header = schema.TextLine(
         title=_(u"Portlet header"),
         description=_(u"Title of the rendered portlet"),
-        constraint=re.compile("[^\s]").match,
+        constraint=re.compile(r"[^\s]").match,
         required=False)
 
     directives.widget(text=RichTextFieldWidget)
