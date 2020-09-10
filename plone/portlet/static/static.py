@@ -3,13 +3,12 @@ from Acquisition import aq_inner
 from plone.app.portlets.portlets import base
 from plone.app.textfield import RichText
 from plone.app.textfield.value import RichTextValue
+from plone.app.z3cform.widget import RichTextFieldWidget
 from plone.autoform import directives
-from plone.autoform.form import AutoExtensibleForm
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.portlet.static import PloneMessageFactory as _
 from plone.portlets.interfaces import IPortletDataProvider
 from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone.utils import getFSVersionTuple
 from Products.CMFPlone.utils import safe_unicode
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope import schema
@@ -22,35 +21,6 @@ import six
 
 
 logger = logging.getLogger('plone.portlet.static')
-WIDGETS_1X = False
-PLONE5 = getFSVersionTuple()[0] >= 5
-
-if PLONE5:
-    from plone.app.z3cform.widget import RichTextFieldWidget
-    base_AddForm = base.AddForm
-    base_EditForm = base.EditForm
-else:
-    # PLONE 4 Support:
-    # Either Plone 4 plus compatible plone.app.widgets, or Plone 4.x without:
-    from plone.app.portlets.browser import z3cformhelper
-    from z3c.form import field
-    try:
-        from plone.app.widgets.dx import RichTextFieldWidget  # req >= 1.9.1+
-
-        class base_AddForm(AutoExtensibleForm, z3cformhelper.AddForm):
-            pass
-
-        class base_EditForm(AutoExtensibleForm, z3cformhelper.EditForm):
-            pass
-
-        WIDGETS_1X = True
-    except ImportError:
-        WIDGETS_1X = False
-        base_AddForm = z3cformhelper.AddForm
-        base_EditForm = z3cformhelper.EditForm
-
-
-USE_AUTOFORM = PLONE5 or WIDGETS_1X
 
 
 class IStaticPortlet(IPortletDataProvider):
@@ -192,16 +162,13 @@ class Renderer(base.Renderer):
         return None
 
 
-class AddForm(base_AddForm):
+class AddForm(base.AddForm):
     """Portlet add form.
 
     This is registered in configure.zcml. The create() method actually
     constructs the assignment that is being added.
     """
-    if USE_AUTOFORM:
-        schema = IStaticPortlet
-    else:
-        fields = field.Fields(IStaticPortlet)
+    schema = IStaticPortlet
 
     label = _(u"title_add_static_portlet", default=u"Add static text portlet")
     description = _(
@@ -213,15 +180,12 @@ class AddForm(base_AddForm):
         return Assignment(**data)
 
 
-class EditForm(base_EditForm):
+class EditForm(base.EditForm):
     """Portlet edit form
 
     This is registered in configure.zcml.
     """
-    if USE_AUTOFORM:
-        schema = IStaticPortlet
-    else:
-        fields = field.Fields(IStaticPortlet)
+    schema = IStaticPortlet
 
     label = _(
         u"title_edit_static_portlet",
