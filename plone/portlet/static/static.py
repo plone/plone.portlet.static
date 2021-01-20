@@ -49,7 +49,7 @@ class IStaticPortlet(IPortletDataProvider):
             u"Tick this box if you want to render the text above "
             "without the standard header, border or footer."
         ),
-        required=True,
+        required=False,
         default=False)
 
     footer = schema.TextLine(
