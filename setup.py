@@ -5,7 +5,7 @@ from setuptools import setup
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-version = '4.0.0a1'
+version = '4.0.0a2.dev0'
 
 long_description = (
     read('README.rst')
