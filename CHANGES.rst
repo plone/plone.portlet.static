@@ -9,6 +9,23 @@ Changelog
 
 .. towncrier release notes start
 
+4.0.0a1 (2021-04-20)
+--------------------
+
+Breaking changes:
+
+
+- Update for Plone 6 with Bootstrap markup
+  [petschki, agitator] (#22)
+
+
+Bug fixes:
+
+
+- Remove explicit required attribute on `omit_border` boolean
+  [petschki] (#20)
+
+
 3.1.6 (2020-09-21)
 ------------------
 
