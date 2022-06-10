@@ -1,9 +1,12 @@
-import os
 from setuptools import find_packages
 from setuptools import setup
 
+import os
+
+
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
+
 
 version = '4.0.0a2.dev0'
 
@@ -12,7 +15,7 @@ long_description = (
     + '\n' +
     read('CHANGES.rst')
     + '\n'
-    )
+)
 
 
 setup(
@@ -32,6 +35,7 @@ setup(
         "Programming Language :: Python",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
     ],
     keywords='plone portlet static',
     author='Plone Foundation',
@@ -64,4 +68,4 @@ setup(
     [z3c.autoinclude.plugin]
     target = plone
     """,
-    )
+)
