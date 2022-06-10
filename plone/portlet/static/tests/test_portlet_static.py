@@ -15,6 +15,22 @@ from zope.component import getUtility, getMultiAdapter
 import unittest
 
 
+def normalize(value):
+    # Strip all white spaces of every line, then join on one line.
+    # But try to avoid getting 'Go to<a href' instead of 'Go to <a href'.
+    lines = []
+    for line in value.splitlines():
+        line = line.strip()
+        if (
+            line.startswith("<")
+            and not line.startswith("</")
+            and not line.startswith("<br")
+        ):
+            line = " " + line
+        lines.append(line)
+    return "".join(lines).strip()
+
+
 class TestPortlet(unittest.TestCase):
 
     layer = PLONEPORTLETSTATIC_INTEGRATION_TESTING
@@ -121,7 +137,7 @@ class TestRenderer(unittest.TestCase):
         r.update()
         output = r.render()
         self.assertTrue('title' in output)
-        self.assertTrue('<b>text</b>' in output)
+        self.assertTrue('<b>text</b>' in normalize(output))
 
     def test_no_header(self):
         r = self.renderer(
