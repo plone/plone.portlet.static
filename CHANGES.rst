@@ -9,6 +9,16 @@ Changelog
 
 .. towncrier release notes start
 
+4.0.0b1 (2022-06-23)
+--------------------
+
+Bug fixes:
+
+
+- Test-only fix: normalize white space.
+  [maurits] (#49)
+
+
 4.0.0a1 (2021-04-20)
 --------------------
 
