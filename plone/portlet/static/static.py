@@ -16,7 +16,6 @@ from zope.interface import implementer
 
 import logging
 import re
-import six
 
 
 logger = logging.getLogger('plone.portlet.static')
@@ -140,10 +139,6 @@ class Renderer(base.Renderer):
                 "Static portlet at %s has not stored text/unicode. "
                 "Assuming utf-8 encoding." % context.absolute_url()
             )
-
-        # Portal transforms on py2 needs encoded strings
-        if six.PY2 and isinstance(orig, str):
-            orig = orig.encode('utf-8')
 
         transformer = getToolByName(context, 'portal_transforms')
         transformer_context = context
