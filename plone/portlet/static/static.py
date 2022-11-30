@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from Acquisition import aq_inner
 from plone.app.portlets.portlets import base
 from plone.app.textfield import RichText
@@ -17,7 +16,6 @@ from zope.interface import implementer
 
 import logging
 import re
-import six
 
 
 logger = logging.getLogger('plone.portlet.static')
@@ -32,35 +30,35 @@ class IStaticPortlet(IPortletDataProvider):
     """
 
     header = schema.TextLine(
-        title=_(u"Portlet header"),
-        description=_(u"Title of the rendered portlet"),
+        title=_("Portlet header"),
+        description=_("Title of the rendered portlet"),
         constraint=re.compile(r"[^\s]").match,
         required=False)
 
     directives.widget(text=RichTextFieldWidget)
     text = RichText(
-        title=_(u"Text"),
-        description=_(u"The text to render"),
+        title=_("Text"),
+        description=_("The text to render"),
         required=True)
 
     omit_border = schema.Bool(
-        title=_(u"Omit portlet border"),
+        title=_("Omit portlet border"),
         description=_(
-            u"Tick this box if you want to render the text above "
+            "Tick this box if you want to render the text above "
             "without the standard header, border or footer."
         ),
         required=False,
         default=False)
 
     footer = schema.TextLine(
-        title=_(u"Portlet footer"),
-        description=_(u"Text to be shown in the footer"),
+        title=_("Portlet footer"),
+        description=_("Text to be shown in the footer"),
         required=False)
 
     more_url = schema.ASCIILine(
-        title=_(u"Details link"),
+        title=_("Details link"),
         description=_(
-            u"If given, the header and footer will link to this URL."
+            "If given, the header and footer will link to this URL."
         ),
         required=False)
 
@@ -73,13 +71,13 @@ class Assignment(base.Assignment):
     with columns.
     """
 
-    header = _(u"title_static_portlet", default=u"Static text portlet")
-    text = u""
+    header = _("title_static_portlet", default="Static text portlet")
+    text = ""
     omit_border = False
-    footer = u""
+    footer = ""
     more_url = ''
 
-    def __init__(self, header=u"", text=u"", omit_border=False, footer=u"",
+    def __init__(self, header="", text="", omit_border=False, footer="",
                  more_url=''):
         self.header = header
         self.text = text
@@ -93,7 +91,7 @@ class Assignment(base.Assignment):
         "manage portlets" screen. Here, we use the title that the user gave or
         static string if title not defined.
         """
-        return self.header or _(u'portlet_static', default=u"Static Portlet")
+        return self.header or _('portlet_static', default="Static Portlet")
 
 
 class Renderer(base.Renderer):
@@ -131,7 +129,7 @@ class Renderer(base.Renderer):
         if isinstance(orig, RichTextValue):
             orig = orig.raw
 
-        if not isinstance(orig, six.text_type):
+        if not isinstance(orig, str):
             # Apply a potentially lossy transformation, and hope we stored
             # utf-8 text. There were bugs in earlier versions of this portlet
             # which stored text directly as sent by the browser, which could
@@ -141,10 +139,6 @@ class Renderer(base.Renderer):
                 "Static portlet at %s has not stored text/unicode. "
                 "Assuming utf-8 encoding." % context.absolute_url()
             )
-
-        # Portal transforms on py2 needs encoded strings
-        if six.PY2 and isinstance(orig, six.text_type):
-            orig = orig.encode('utf-8')
 
         transformer = getToolByName(context, 'portal_transforms')
         transformer_context = context
@@ -170,10 +164,10 @@ class AddForm(base.AddForm):
     """
     schema = IStaticPortlet
 
-    label = _(u"title_add_static_portlet", default=u"Add static text portlet")
+    label = _("title_add_static_portlet", default="Add static text portlet")
     description = _(
-        u"description_static_portlet",
-        default=u"A portlet which can display static HTML text."
+        "description_static_portlet",
+        default="A portlet which can display static HTML text."
     )
 
     def create(self, data):
@@ -188,10 +182,10 @@ class EditForm(base.EditForm):
     schema = IStaticPortlet
 
     label = _(
-        u"title_edit_static_portlet",
-        default=u"Edit static text portlet"
+        "title_edit_static_portlet",
+        default="Edit static text portlet"
     )
     description = _(
-        u"description_static_portlet",
-        default=u"A portlet which can display static HTML text."
+        "description_static_portlet",
+        default="A portlet which can display static HTML text."
     )

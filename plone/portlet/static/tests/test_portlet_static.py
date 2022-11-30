@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.app.portlets.storage import PortletAssignmentMapping
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
@@ -45,7 +44,7 @@ class TestPortlet(unittest.TestCase):
         self.assertEqual(portlet.addview, 'plone.portlet.static.Static')
 
     def testInterfaces(self):
-        portlet = static.Assignment(header=u"title", text="text")
+        portlet = static.Assignment(header="title", text="text")
         self.assertTrue(IPortletAssignment.providedBy(portlet))
         self.assertTrue(IPortletDataProvider.providedBy(portlet.data))
 
@@ -59,7 +58,7 @@ class TestPortlet(unittest.TestCase):
         addview = mapping.restrictedTraverse('+/' + portlet.addview)
 
         addview.createAndAdd(
-            data={'header': u"test title", 'text': u"test text"}
+            data={'header': "test title", 'text': "test text"}
         )
 
         self.assertEqual(len(mapping), 1)
@@ -69,7 +68,7 @@ class TestPortlet(unittest.TestCase):
         mapping = PortletAssignmentMapping()
         request = self.portal.REQUEST
 
-        mapping['foo'] = static.Assignment(header=u"title", text="text")
+        mapping['foo'] = static.Assignment(header="title", text="text")
         editview = getMultiAdapter((mapping['foo'], request), name='edit')
         self.assertTrue(isinstance(editview, static.EditForm))
 
@@ -82,7 +81,7 @@ class TestPortlet(unittest.TestCase):
             name='plone.rightcolumn',
             context=self.portal
         )
-        assignment = static.Assignment(header=u"title", text="text")
+        assignment = static.Assignment(header="title", text="text")
 
         renderer = getMultiAdapter(
             (context, request, view, manager, assignment),
@@ -114,7 +113,7 @@ class TestRenderer(unittest.TestCase):
             context=self.portal
         )
         assignment = assignment or static.Assignment(
-            header=u"title",
+            header="title",
             text="text"
         )
         ren = getMultiAdapter(
@@ -130,7 +129,7 @@ class TestRenderer(unittest.TestCase):
         r = self.renderer(
             context=self.portal,
             assignment=static.Assignment(
-                header=u"title",
+                header="title",
                 text="<b>text</b>"
             )
         )
@@ -156,7 +155,7 @@ class TestRenderer(unittest.TestCase):
         r = self.renderer(
             context=self.portal,
             assignment=static.Assignment(
-                header=u"Welcome text",
+                header="Welcome text",
                 text="<b>text</b>"
             )
         )

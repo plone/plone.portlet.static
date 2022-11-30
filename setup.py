@@ -58,7 +58,6 @@ setup(
         "plone.app.portlets",
         "plone.app.textfield",
         "plone.i18n",
-        'six',
         'zope.component',
         'zope.i18nmessageid',
         'zope.interface',
