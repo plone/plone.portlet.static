@@ -49,15 +49,14 @@ setup(
         ]
     ),
     install_requires=[
-        "setuptools",
+        "plone.base",
         "plone.portlets",
         "plone.app.portlets",
         "plone.app.textfield",
+        "plone.app.z3cform",
+        "plone.autoform",
         "plone.i18n",
-        "zope.component",
-        "zope.i18nmessageid",
-        "zope.interface",
-        "zope.schema",
+        "Products.GenericSetup",
         "Zope",
     ],
     entry_points="""
