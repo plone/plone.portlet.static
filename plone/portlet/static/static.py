@@ -4,11 +4,11 @@ from plone.app.textfield import RichText
 from plone.app.textfield.value import RichTextValue
 from plone.app.z3cform.widget import RichTextFieldWidget
 from plone.autoform import directives
+from plone.base.utils import safe_text
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.portlet.static import PloneMessageFactory as _
 from plone.portlets.interfaces import IPortletDataProvider
 from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone.utils import safe_unicode
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope import schema
 from zope.component import getUtility
@@ -131,7 +131,7 @@ class Renderer(base.Renderer):
             # utf-8 text. There were bugs in earlier versions of this portlet
             # which stored text directly as sent by the browser, which could
             # be any encoding in the world.
-            orig = safe_unicode(orig)
+            orig = safe_text(orig)
             logger.warn(
                 "Static portlet at %s has not stored text/unicode. "
                 "Assuming utf-8 encoding." % context.absolute_url()
@@ -154,7 +154,7 @@ class Renderer(base.Renderer):
         )
         result = data.getData()
         if result:
-            return safe_unicode(result)
+            return safe_text(result)
         return None
 
 
