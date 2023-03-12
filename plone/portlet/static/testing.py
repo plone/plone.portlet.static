@@ -5,20 +5,19 @@ from zope.configuration import xmlconfig
 
 
 class PlonePortletStaticLayer(PloneSandboxLayer):
-
     def setUpZope(self, app, configurationContext):
         import plone.portlet.static
+
         xmlconfig.file(
-            'configure.zcml',
-            plone.portlet.static,
-            context=configurationContext)
+            "configure.zcml", plone.portlet.static, context=configurationContext
+        )
 
     def setUpPloneSite(self, portal):
-        applyProfile(portal, 'plone.portlet.static:default')
+        applyProfile(portal, "plone.portlet.static:default")
+
 
 PLONEPORTLETSTATIC_FIXTURE = PlonePortletStaticLayer()
 
 PLONEPORTLETSTATIC_INTEGRATION_TESTING = IntegrationTesting(
-    bases=(PLONEPORTLETSTATIC_FIXTURE,),
-    name="PloneAppCollectionLayer:Integration"
+    bases=(PLONEPORTLETSTATIC_FIXTURE,), name="PloneAppCollectionLayer:Integration"
 )

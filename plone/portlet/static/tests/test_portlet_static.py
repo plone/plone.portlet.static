@@ -33,17 +33,16 @@ def normalize(value):
 
 
 class TestPortlet(unittest.TestCase):
-
     layer = PLONEPORTLETSTATIC_INTEGRATION_TESTING
 
     def setUp(self):
-        self.portal = self.layer['portal']
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.portal = self.layer["portal"]
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
         login(self.portal, TEST_USER_NAME)
 
     def testPortletTypeRegistered(self):
-        portlet = getUtility(IPortletType, name='plone.portlet.static.Static')
-        self.assertEqual(portlet.addview, 'plone.portlet.static.Static')
+        portlet = getUtility(IPortletType, name="plone.portlet.static.Static")
+        self.assertEqual(portlet.addview, "plone.portlet.static.Static")
 
     def testInterfaces(self):
         portlet = static.Assignment(header="title", text="text")
@@ -51,17 +50,13 @@ class TestPortlet(unittest.TestCase):
         self.assertTrue(IPortletDataProvider.providedBy(portlet.data))
 
     def testInvokeAddview(self):
-        portlet = getUtility(IPortletType, name='plone.portlet.static.Static')
-        mapping = self.portal.restrictedTraverse(
-            '++contextportlets++plone.leftcolumn'
-        )
+        portlet = getUtility(IPortletType, name="plone.portlet.static.Static")
+        mapping = self.portal.restrictedTraverse("++contextportlets++plone.leftcolumn")
         for m in mapping.keys():
             del mapping[m]
-        addview = mapping.restrictedTraverse('+/' + portlet.addview)
+        addview = mapping.restrictedTraverse("+/" + portlet.addview)
 
-        addview.createAndAdd(
-            data={'header': "test title", 'text': "test text"}
-        )
+        addview.createAndAdd(data={"header": "test title", "text": "test text"})
 
         self.assertEqual(len(mapping), 1)
         self.assertTrue(isinstance(list(mapping.values())[0], static.Assignment))
@@ -70,80 +65,64 @@ class TestPortlet(unittest.TestCase):
         mapping = PortletAssignmentMapping()
         request = self.portal.REQUEST
 
-        mapping['foo'] = static.Assignment(header="title", text="text")
-        editview = getMultiAdapter((mapping['foo'], request), name='edit')
+        mapping["foo"] = static.Assignment(header="title", text="text")
+        editview = getMultiAdapter((mapping["foo"], request), name="edit")
         self.assertTrue(isinstance(editview, static.EditForm))
 
     def testRenderer(self):
         context = self.portal
         request = self.portal.REQUEST
-        view = self.portal.restrictedTraverse('@@plone')
+        view = self.portal.restrictedTraverse("@@plone")
         manager = getUtility(
-            IPortletManager,
-            name='plone.rightcolumn',
-            context=self.portal
+            IPortletManager, name="plone.rightcolumn", context=self.portal
         )
         assignment = static.Assignment(header="title", text="text")
 
         renderer = getMultiAdapter(
-            (context, request, view, manager, assignment),
-            IPortletRenderer
+            (context, request, view, manager, assignment), IPortletRenderer
         )
         self.assertTrue(isinstance(renderer, static.Renderer))
 
-        self.assertTrue(renderer.available,
-                        "Renderer should be available by default.")
+        self.assertTrue(renderer.available, "Renderer should be available by default.")
 
 
 class TestRenderer(unittest.TestCase):
-
     layer = PLONEPORTLETSTATIC_INTEGRATION_TESTING
 
     def setUp(self):
-        self.portal = self.layer['portal']
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.portal = self.layer["portal"]
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
         login(self.portal, TEST_USER_NAME)
 
-    def renderer(self, context=None, request=None, view=None, manager=None,
-                 assignment=None):
+    def renderer(
+        self, context=None, request=None, view=None, manager=None, assignment=None
+    ):
         context = context or self.portal
         request = request or self.portal.REQUEST
-        view = view or self.portal.restrictedTraverse('@@plone')
+        view = view or self.portal.restrictedTraverse("@@plone")
         manager = manager or getUtility(
-            IPortletManager,
-            name='plone.rightcolumn',
-            context=self.portal
+            IPortletManager, name="plone.rightcolumn", context=self.portal
         )
-        assignment = assignment or static.Assignment(
-            header="title",
-            text="text"
-        )
+        assignment = assignment or static.Assignment(header="title", text="text")
         ren = getMultiAdapter(
-            (context, request, view, manager, assignment),
-            IPortletRenderer
+            (context, request, view, manager, assignment), IPortletRenderer
         )
-        ren.__portlet_metadata__ = {
-            'key': '/'.join(self.portal.getPhysicalPath())
-        }
+        ren.__portlet_metadata__ = {"key": "/".join(self.portal.getPhysicalPath())}
         return ren
 
     def test_render(self):
         r = self.renderer(
             context=self.portal,
-            assignment=static.Assignment(
-                header="title",
-                text="<b>text</b>"
-            )
+            assignment=static.Assignment(header="title", text="<b>text</b>"),
         )
         r.update()
         output = r.render()
-        self.assertTrue('title' in output)
-        self.assertTrue('<b>text</b>' in normalize(output))
+        self.assertTrue("title" in output)
+        self.assertTrue("<b>text</b>" in normalize(output))
 
     def test_no_header(self):
         r = self.renderer(
-            context=self.portal,
-            assignment=static.Assignment(text="<b>text</b>")
+            context=self.portal, assignment=static.Assignment(text="<b>text</b>")
         )
         r.update()
         output = r.render()
@@ -156,22 +135,18 @@ class TestRenderer(unittest.TestCase):
     def test_css_class(self):
         r = self.renderer(
             context=self.portal,
-            assignment=static.Assignment(
-                header="Welcome text",
-                text="<b>text</b>"
-            )
+            assignment=static.Assignment(header="Welcome text", text="<b>text</b>"),
         )
-        self.assertEqual('portlet-static-welcome-text', r.css_class())
+        self.assertEqual("portlet-static-welcome-text", r.css_class())
 
     def test_relative_link(self):
         r = self.renderer(
             context=self.portal,
-            assignment=static.Assignment(
-                text="""<a href="relative/link">link</a>"""
-            )
+            assignment=static.Assignment(text="""<a href="relative/link">link</a>"""),
         )
         r.__portlet_metadata__ = dict(
-            category='context', key='/'.join(self.portal.getPhysicalPath()))
+            category="context", key="/".join(self.portal.getPhysicalPath())
+        )
         r.update()
         output = r.render()
         self.assertTrue("http://nohost/plone/relative/link" in output)
@@ -180,6 +155,7 @@ class TestRenderer(unittest.TestCase):
 def test_suite():
     from unittest import makeSuite
     from unittest import TestSuite
+
     suite = TestSuite()
     suite.addTest(makeSuite(TestPortlet))
     suite.addTest(makeSuite(TestRenderer))
