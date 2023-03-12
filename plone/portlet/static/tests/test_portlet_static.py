@@ -1,8 +1,8 @@
 from plone.app.portlets.storage import PortletAssignmentMapping
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import login
 from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.app.testing import TEST_USER_NAME
 from plone.portlet.static import static
 from plone.portlet.static.testing import PLONEPORTLETSTATIC_INTEGRATION_TESTING
 from plone.portlets.interfaces import IPortletAssignment
@@ -10,7 +10,9 @@ from plone.portlets.interfaces import IPortletDataProvider
 from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletRenderer
 from plone.portlets.interfaces import IPortletType
-from zope.component import getUtility, getMultiAdapter
+from zope.component import getMultiAdapter
+from zope.component import getUtility
+
 import unittest
 
 
@@ -176,7 +178,8 @@ class TestRenderer(unittest.TestCase):
 
 
 def test_suite():
-    from unittest import TestSuite, makeSuite
+    from unittest import makeSuite
+    from unittest import TestSuite
     suite = TestSuite()
     suite.addTest(makeSuite(TestPortlet))
     suite.addTest(makeSuite(TestRenderer))

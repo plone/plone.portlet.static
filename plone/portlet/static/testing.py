@@ -1,5 +1,5 @@
-from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import applyProfile
+from plone.app.testing import PloneSandboxLayer
 from plone.app.testing.layers import IntegrationTesting
 from zope.configuration import xmlconfig
 
