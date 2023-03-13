@@ -2,7 +2,7 @@ Introduction
 ============
 
 A Plone Portlet providing a rich-text field for more or less static text.
-It is availbale and will be displayed where portlets can be placed.
+It is available and will be displayed where portlets can be placed.
 
 It is part of the Plone core package.
 

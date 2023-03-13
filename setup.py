@@ -8,18 +8,13 @@ def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
 
-version = '4.0.1.dev0'
+version = "4.0.1.dev0"
 
-long_description = (
-    read('README.rst')
-    + '\n' +
-    read('CHANGES.rst')
-    + '\n'
-)
+long_description = read("README.rst") + "\n" + read("CHANGES.rst") + "\n"
 
 
 setup(
-    name='plone.portlet.static',
+    name="plone.portlet.static",
     version=version,
     description="An editable static HTML portlet for Plone.",
     long_description=long_description,
@@ -38,32 +33,31 @@ setup(
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
     ],
-    keywords='plone portlet static',
-    author='Plone Foundation',
-    author_email='plone-developers@lists.sourceforge.net',
-    url='https://pypi.org/project/plone.portlet.static',
-    license='GPL version 2',
+    keywords="plone portlet static",
+    author="Plone Foundation",
+    author_email="plone-developers@lists.sourceforge.net",
+    url="https://pypi.org/project/plone.portlet.static",
+    license="GPL version 2",
     packages=find_packages(),
-    namespace_packages=["plone", 'plone.portlet'],
+    namespace_packages=["plone", "plone.portlet"],
     include_package_data=True,
     zip_safe=False,
     python_requires=">=3.8",
     extras_require=dict(
         test=[
-            'plone.app.testing',
+            "plone.app.testing",
         ]
     ),
     install_requires=[
-        'setuptools',
+        "plone.base",
         "plone.portlets",
         "plone.app.portlets",
         "plone.app.textfield",
+        "plone.app.z3cform",
+        "plone.autoform",
         "plone.i18n",
-        'zope.component',
-        'zope.i18nmessageid',
-        'zope.interface',
-        'zope.schema',
-        'Zope',
+        "Products.GenericSetup",
+        "Zope",
     ],
     entry_points="""
     [z3c.autoinclude.plugin]
