@@ -155,7 +155,9 @@ class TestRenderer(unittest.TestCase):
 def test_suite():
     import unittest
 
-    return unittest.TestSuite((
-        unittest.defaultTestLoader.loadTestsFromTestCase(TestPortlet),
-        unittest.defaultTestLoader.loadTestsFromTestCase(TestRenderer),
-    ))
+    return unittest.TestSuite(
+        (
+            unittest.defaultTestLoader.loadTestsFromTestCase(TestPortlet),
+            unittest.defaultTestLoader.loadTestsFromTestCase(TestRenderer),
+        )
+    )
