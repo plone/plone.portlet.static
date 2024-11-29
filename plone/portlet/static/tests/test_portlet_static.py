@@ -153,10 +153,11 @@ class TestRenderer(unittest.TestCase):
 
 
 def test_suite():
-    from unittest import makeSuite
-    from unittest import TestSuite
+    import unittest
 
-    suite = TestSuite()
-    suite.addTest(makeSuite(TestPortlet))
-    suite.addTest(makeSuite(TestRenderer))
-    return suite
+    return unittest.TestSuite(
+        (
+            unittest.defaultTestLoader.loadTestsFromTestCase(TestPortlet),
+            unittest.defaultTestLoader.loadTestsFromTestCase(TestRenderer),
+        )
+    )
