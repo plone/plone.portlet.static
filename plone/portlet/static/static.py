@@ -2,7 +2,7 @@ from Acquisition import aq_inner
 from plone.app.portlets.portlets import base
 from plone.app.textfield import RichText
 from plone.app.textfield.value import RichTextValue
-from plone.app.z3cform.widget import RichTextFieldWidget
+from plone.app.z3cform.widgets.richtext import RichTextFieldWidget
 from plone.autoform import directives
 from plone.base.utils import safe_text
 from plone.i18n.normalizer.interfaces import IIDNormalizer
