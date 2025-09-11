@@ -1,16 +1,11 @@
+from pathlib import Path
 from setuptools import find_packages
 from setuptools import setup
-
-import os
-
-
-def read(*rnames):
-    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
 
 version = "4.0.5.dev0"
 
-long_description = read("README.rst") + "\n" + read("CHANGES.rst") + "\n"
+long_description = f"{Path('README.rst').read_text()}\n{Path('CHANGES.rst')}\n"
 
 
 setup(
@@ -38,7 +33,8 @@ setup(
     author_email="plone-developers@lists.sourceforge.net",
     url="https://pypi.org/project/plone.portlet.static",
     license="GPL version 2",
-    packages=find_packages(),
+    packages=find_packages("src"),
+    package_dir={"": "src"},
     namespace_packages=["plone", "plone.portlet"],
     include_package_data=True,
     zip_safe=False,
