@@ -39,7 +39,6 @@ setup(
         ]
     ),
     install_requires=[
-        "setuptools",
         "plone.base",
         "plone.portlets",
         "plone.app.portlets",
