@@ -1,14 +1,17 @@
-Introduction
-============
+plone.portlet.static
+====================
 
-A Plone Portlet providing a rich-text field for more or less static text.
-It is available and will be displayed where portlets can be placed.
+**This distribution is empty.**
+Since Plone 6.3 its code is part of the
+`plone.portlets <https://pypi.org/project/plone.portlets/>`_ distribution,
+see `PLIP 4137 <https://github.com/plone/Products.CMFPlone/issues/4137>`_.
 
-It is part of the Plone core package.
+The import path ``plone.portlet.static`` did not change.
+This package only depends on ``plone.portlets``,
+so existing dependencies on ``plone.portlet.static`` keep working.
+New code should depend on ``plone.portlets`` directly.
 
-Source Code
-===========
-
-Contributors please read the document `Process for Plone core's development <https://docs.plone.org/develop/coredev/docs/index.html>`_
-
-Sources are at the `Plone code repository hosted at Github <https://github.com/plone/plone.portlet.static>`_.
+The code for Plone 6.2 and earlier is maintained on the
+``5.x`` branch (and older branches) of this repository,
+the source code for Plone 6.3 and later lives in
+https://github.com/plone/plone.portlets.
