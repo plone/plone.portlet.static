@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "plone.portlet.static"
-version = "6.0.0a1.dev0"
+version = "6.0.0a1"
 description = "Empty transitional package, the code moved to plone.portlets. Formerly: An editable static HTML portlet for Plone."
 readme = "README.rst"
 license = "GPL-2.0-only"
